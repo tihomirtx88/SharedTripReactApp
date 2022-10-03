@@ -14,8 +14,8 @@ const Login = () => {
                                 className="form-control"
                                 id="email"
                                 placeholder="Enter email"
-                                name=""
-                                defaultValue=""
+                                name="email"
+                                
                             />
                         </div>
                         <div className="form-group">
@@ -25,13 +25,13 @@ const Login = () => {
                                 className="form-control"
                                 id="password"
                                 placeholder="Password"
-                                name=""
-                                defaultValue=""
+                                name="password"
+                                
                             />
                         </div>
                         <div className="form-group">
                             <p>
-                                Not registered yet? <a href="">Register Now!</a>
+                                Not registered yet? <a href="/register">Register Now!</a>
                             </p>
                         </div>
                         <button type="submit" className="btn btn-primary">

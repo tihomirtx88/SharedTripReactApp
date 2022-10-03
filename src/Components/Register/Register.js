@@ -14,8 +14,8 @@ const Register = () => {
                                 className="form-control"
                                 id="email"
                                 placeholder="Enter email"
-                                name=""
-                                defaultValue=""
+                                name="email"
+                                
                             />
                         </div>
                         <div className="form-group">
@@ -25,8 +25,8 @@ const Register = () => {
                                 className="form-control"
                                 id="password"
                                 placeholder="Password"
-                                name=""
-                                defaultValue=""
+                                name="password"
+                               
                             />
                         </div>
                         <div className="form-group">
@@ -36,26 +36,29 @@ const Register = () => {
                                 className="form-control"
                                 id="rePassword"
                                 placeholder="Re-Password"
-                                name=""
-                                defaultValue=""
+                                name="rePassword"
+                                
                             />
                         </div>
                         <label>Gender</label>
                         <div className="gender">
-                            <input type="radio" id="female" name="" defaultValue="" />
+                            <input 
+                            type="radio"
+                             id="female" 
+                             name="female" 
+                              />
                             <label htmlFor="female">Female</label>
                             <input
                                 type="radio"
                                 id="male"
-                                name=""
-                                defaultValue=""
+                                name="male"
                                 defaultChecked=""
                             />
                             <label htmlFor="male">Male</label>
                         </div>
                         <div className="form-group">
                             <p>
-                                Already have account? <a href="">Login Now!</a>
+                                Already have account? <a href="/login">Login Now!</a>
                             </p>
                         </div>
                         <button type="submit" className="btn btn-primary">
