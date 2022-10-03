@@ -7,14 +7,15 @@ import Home from './Components/Home/Home';
 
 function App() {
   return (
-     <Header/>
+    <>
+     <Header />
        <main>
           <Routes>
-               <Route path='/' element={(<Home />)} />
+               <Route path='/' element={<Home />} />
           </Routes>
        </main>
      <Footer/>
-
+    </>
   );
 }
 

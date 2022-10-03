@@ -28,9 +28,9 @@ const Header = () => {
                                 </a>
                             </li>
     
-                            {user.email
+                            {/* {user.email
                             //TODO user authentication
-                                ?
+                                ? */}
                                 <>
                                     <li className="nav-item">
                                         <a className="nav-link" href="/create">
@@ -42,13 +42,13 @@ const Header = () => {
                                             Profile
                                         </a>
                                     </li>
-                                    <li className="nav-item">
+                                    {/* <li className="nav-item">
                                         <a className="nav-link" href="logout">
                                             Logout as [ {user.email} ]
                                         </a>
-                                    </li>
+                                    </li> */}
                                 </>
-                                :
+                                {/* : */}
                                 <>
                                     <li className="nav-item">
                                         <a className="nav-link" href="/login">
