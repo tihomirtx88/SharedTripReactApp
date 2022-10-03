@@ -8,7 +8,7 @@ export const UserProvider = ({ children }) => {
     const history = useNavigate()
 
     useEffect(() => {
-        if (!user.token) {
+        if (!user.token) {AAswfDCASc
             return
         }
         
