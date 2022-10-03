@@ -1,17 +1,16 @@
 import { createContext, useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-export const UserContext = createContext({ user: {}, setUser })
+export const UserContext = createContext({ user: {} })
 
-export const UserProvider = () => {
-    const [user, setUser] = useState()
-    const history = useHistory()
+export const UserProvider = ({ children }) => {
+    const [user, setUser] = useState({})
+    const history = useNavigate()
 
     useEffect(() => {
         if (!user.token) {
             return
         }
-        scrollToTop()
 
     }, [user])
 
