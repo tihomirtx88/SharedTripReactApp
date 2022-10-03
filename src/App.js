@@ -5,11 +5,12 @@ import Header from './Components/Header/Header';
 import Home from './Components/Home/Home';
 import Login from './Components/Login/Login';
 import Register from './Components/Register/Register';
+import { UserProvider } from './context/UserProvider';
 
 
 function App() {
   return (
-    <>
+    <UserProvider>
      <Header />
        <main>
           <Routes>
@@ -19,7 +20,7 @@ function App() {
           </Routes>
        </main>
      <Footer/>
-    </>
+    </UserProvider>
   );
 }
 
