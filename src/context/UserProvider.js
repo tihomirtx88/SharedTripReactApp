@@ -11,7 +11,7 @@ export const UserProvider = ({ children }) => {
         if (!user.token) {
             return
         }
-
+        
     }, [user])
 
     return (
