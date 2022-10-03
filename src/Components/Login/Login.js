@@ -1,4 +1,41 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 const Login = () => {
+
+    const [login, setLogin] = useState({});
+    const navigate = useNavigate();
+
+    const fetchLogin = () => {
+        fetch(`http://localhost:3030/users/login`, {
+            method: `POST`,
+            body: JSON.stringify(login),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (!data.token) {
+                throw Error();
+            }
+            localStorage.setItem("token", data.token);
+            navigate(`/`);
+        })
+        .catch(() => alert(`Wrong email or password`));
+    }
+
+    const onSubmit = (ev) => {
+       ev.preventDefault();
+       fetchLogin();
+    } 
+
+   const changeHandler = (ev) => {
+       setLogin({
+           ...login,
+           [ev.target.name]: ev.target.value
+       });
+   }
 
 
     return (
@@ -6,7 +43,7 @@ const Login = () => {
             <div className="container login-page">
                 <h1>Login</h1>
                 <div className="login">
-                    <form action="" method="">
+                    <form onSubmit={onSubmit} action="" method="">
                         <div className="form-group">
                             <label htmlFor="email">Email address</label>
                             <input
@@ -15,6 +52,8 @@ const Login = () => {
                                 id="email"
                                 placeholder="Enter email"
                                 name="email"
+                                value={login.email || ""}
+                                onChange={changeHandler}
                                 
                             />
                         </div>
@@ -26,6 +65,9 @@ const Login = () => {
                                 id="password"
                                 placeholder="Password"
                                 name="password"
+                                value={login.password || ""}
+                                onChange={changeHandler}
+
                                 
                             />
                         </div>
