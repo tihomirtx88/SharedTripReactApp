@@ -1,4 +1,8 @@
+import {Link} from "react-router-dom";
+
 const Header = () => {
+
+
    
     return (
         <>
@@ -18,14 +22,14 @@ const Header = () => {
                     <div className="collapse navbar-collapse" id="navbarResponsive">
                         <ul className="navbar-nav ml-auto">
                             <li className="nav-item">
-                                <a className="nav-link" href="/">
+                                <Link className="nav-link" to="/">
                                     Home
-                                </a>
+                                </Link>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="/trips">
+                                <Link className="nav-link" to="/trips">
                                     Shared Trips
-                                </a>
+                                </Link>
                             </li>
     
                             {/* {user.email
@@ -33,14 +37,14 @@ const Header = () => {
                                 ? */}
                                 <>
                                     <li className="nav-item">
-                                        <a className="nav-link" href="/create">
+                                        <Link className="nav-link" to="/create">
                                             Offer Trip
-                                        </a>
+                                        </Link>
                                     </li>
                                     <li className="nav-item">
-                                        <a className="nav-link" href="/profile">
+                                        <Link className="nav-link" to="/profile">
                                             Profile
-                                        </a>
+                                        </Link>
                                     </li>
                                     {/* <li className="nav-item">
                                         <a className="nav-link" href="logout">
@@ -51,18 +55,16 @@ const Header = () => {
                                 {/* : */}
                                 <>
                                     <li className="nav-item">
-                                        <a className="nav-link" href="/login">
+                                        <Link className="nav-link" to="/login">
                                             Login
-                                        </a>
+                                        </Link>
                                     </li>
                                     <li className="nav-item">
-                                        <a className="nav-link" href="/register">
+                                        <Link className="nav-link" to="/register">
                                             Register
-                                        </a>
+                                        </Link>
                                     </li>
                                 </>
-                            }
-
                         </ul>
                     </div>
                 </div>
