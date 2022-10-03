@@ -1,4 +1,37 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 const Register = () => {
+
+    const [register, setRegister] = useState({});
+    const navigate = useNavigate();
+
+    const fetchRegister = () => {
+        fetch(`http://localhost:3030/users/register`, {
+            method: `POST`,
+            body: JSON.stringify(register),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+           console.log(data);
+        })
+    }
+
+    const onSubmit = (ev) => {
+        ev.preventDefault();
+        fetchRegister();
+     } 
+ 
+    const changeHandler = (ev) => {
+        setRegister({
+            ...register,
+            [ev.target.name]: ev.target.value
+        });
+    }
+
 
 
     return (
@@ -6,7 +39,7 @@ const Register = () => {
             <div className="container register-page">
                 <h1>Register</h1>
                 <div className="register">
-                    <form action="" method="">
+                    <form onSubmit={onSubmit} action="" method="">
                         <div className="form-group">
                             <label htmlFor="email">Email address</label>
                             <input
@@ -15,6 +48,8 @@ const Register = () => {
                                 id="email"
                                 placeholder="Enter email"
                                 name="email"
+                                value={register.email || ""}
+                                onChange={changeHandler}
                                 
                             />
                         </div>
@@ -26,6 +61,8 @@ const Register = () => {
                                 id="password"
                                 placeholder="Password"
                                 name="password"
+                                value={register.password || ""}
+                                onChange={changeHandler}
                                
                             />
                         </div>
@@ -37,6 +74,9 @@ const Register = () => {
                                 id="rePassword"
                                 placeholder="Re-Password"
                                 name="rePassword"
+                                value={register.rePassword || ""}
+                                onChange={changeHandler}
+                                
                                 
                             />
                         </div>
@@ -45,14 +85,19 @@ const Register = () => {
                             <input 
                             type="radio"
                              id="female" 
-                             name="female" 
+                             name="female"
+                             value={register.female || ""}
+                             onChange={changeHandler}
+
                               />
                             <label htmlFor="female">Female</label>
                             <input
                                 type="radio"
                                 id="male"
                                 name="male"
-                                defaultChecked=""
+                                value={register.male || ""}
+                                onChange={changeHandler}
+                                // defaultChecked=""
                             />
                             <label htmlFor="male">Male</label>
                         </div>
