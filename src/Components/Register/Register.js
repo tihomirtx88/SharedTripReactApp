@@ -15,12 +15,21 @@ const Register = () => {
         })
             .then((res) => res.json())
             .then((data) => {
+                navigate(`/`);
                 console.log(data);
             });
     };
 
     const onSubmit = (ev) => {
         ev.preventDefault();
+        if (register.password !== register.rePassword) {
+            alert(`Password and repassword dont match`);
+            return
+        }
+        if (register.email === "" || register.password === "") {
+            alert(`All fields are reqired`);
+            return
+        }
         fetchRegister();
     };
 
