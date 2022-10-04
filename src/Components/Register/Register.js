@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
-
     const [register, setRegister] = useState({});
     const navigate = useNavigate();
 
@@ -11,28 +10,26 @@ const Register = () => {
             method: `POST`,
             body: JSON.stringify(register),
             headers: {
-                "Content-Type": "application/json"
-            }
+                "Content-Type": "application/json",
+            },
         })
-        .then(res => res.json())
-        .then(data => {
-           console.log(data);
-        })
-    }
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+            });
+    };
 
     const onSubmit = (ev) => {
         ev.preventDefault();
         fetchRegister();
-     } 
- 
+    };
+
     const changeHandler = (ev) => {
         setRegister({
             ...register,
-            [ev.target.name]: ev.target.value
+            [ev.target.name]: ev.target.value,
         });
-    }
-
-
+    };
 
     return (
         <section className="py-5" id="register-page">
@@ -50,7 +47,6 @@ const Register = () => {
                                 name="email"
                                 value={register.email || ""}
                                 onChange={changeHandler}
-                                
                             />
                         </div>
                         <div className="form-group">
@@ -63,7 +59,6 @@ const Register = () => {
                                 name="password"
                                 value={register.password || ""}
                                 onChange={changeHandler}
-                               
                             />
                         </div>
                         <div className="form-group">
@@ -76,28 +71,26 @@ const Register = () => {
                                 name="rePassword"
                                 value={register.rePassword || ""}
                                 onChange={changeHandler}
-                                
-                                
                             />
                         </div>
                         <label>Gender</label>
                         <div className="gender">
-                            <input 
-                            type="radio"
-                             id="female" 
-                             name="female"
-                             value={register.female || ""}
-                             onChange={changeHandler}
-
-                              />
+                            <input
+                                type="radio"
+                                id="female"
+                                name="gender"
+                                value="female"
+                                checked={register.gender == "female"}
+                                onChange={changeHandler}
+                            />
                             <label htmlFor="female">Female</label>
                             <input
                                 type="radio"
                                 id="male"
-                                name="male"
-                                value={register.male || ""}
+                                name="gender"
+                                value="male"
+                                checked={register.gender == "male"}
                                 onChange={changeHandler}
-                                // defaultChecked=""
                             />
                             <label htmlFor="male">Male</label>
                         </div>
@@ -113,8 +106,7 @@ const Register = () => {
                 </div>
             </div>
         </section>
-
-    )
-}
+    );
+};
 
 export default Register;

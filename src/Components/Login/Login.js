@@ -1,42 +1,39 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
+import { UserContext } from "../../context/UserProvider";
 
 const Login = () => {
-
+    const { setUser } = useContext(UserContext);
     const [login, setLogin] = useState({});
-    const navigate = useNavigate();
 
     const fetchLogin = () => {
         fetch(`http://localhost:3030/users/login`, {
             method: `POST`,
             body: JSON.stringify(login),
             headers: {
-                "Content-Type": "application/json"
-            }
+                "Content-Type": "application/json",
+            },
         })
-        .then(res => res.json())
-        .then(data => {
-            if (!data.token) {
-                throw Error();
-            }
-            localStorage.setItem("token", data.token);
-            navigate(`/`);
-        })
-        .catch(() => alert(`Wrong email or password`));
-    }
+            .then((res) => res.json())
+            .then((data) => {
+                if (!data.accessToken) {
+                    throw Error();
+                }
+                setUser(data);
+            })
+            .catch(() => alert(`Wrong email or password`));
+    };
 
     const onSubmit = (ev) => {
-       ev.preventDefault();
-       fetchLogin();
-    } 
+        ev.preventDefault();
+        fetchLogin();
+    };
 
-   const changeHandler = (ev) => {
-       setLogin({
-           ...login,
-           [ev.target.name]: ev.target.value
-       });
-   }
-
+    const changeHandler = (ev) => {
+        setLogin({
+            ...login,
+            [ev.target.name]: ev.target.value,
+        });
+    };
 
     return (
         <section className="py-5" id="login-page">
@@ -54,7 +51,6 @@ const Login = () => {
                                 name="email"
                                 value={login.email || ""}
                                 onChange={changeHandler}
-                                
                             />
                         </div>
                         <div className="form-group">
@@ -67,8 +63,6 @@ const Login = () => {
                                 name="password"
                                 value={login.password || ""}
                                 onChange={changeHandler}
-
-                                
                             />
                         </div>
                         <div className="form-group">
@@ -83,8 +77,7 @@ const Login = () => {
                 </div>
             </div>
         </section>
-
-    )
-}
+    );
+};
 
 export default Login;
