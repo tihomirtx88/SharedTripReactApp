@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserProvider";
 
 const initialTrip = {
@@ -16,8 +17,9 @@ const initialTrip = {
 
 const CreateTrip = () => {
 
-    const {setUser} = useContext(UserContext);
+    const { user } = useContext(UserContext);
     const [tripInfo, setTripInfo] = useState(initialTrip);
+    const navigate = useNavigate();
 
     const changeHandler = (ev) => {
         setTripInfo({
@@ -45,17 +47,14 @@ const CreateTrip = () => {
             method: `POST`,
             body: JSON.stringify(postTrip),
             headers: {
-                'X-Authorization': setUser,
+                'X-Authorization': user.accessToken,
                 'Content-Type': 'application/json'
             }
         })
         .then((res) => res.json())
         .then((data) => {
-            if (!data.accessToken) {
-                throw Error();
-            }
-            console.log(`lalala`)
-            setUser(data);
+            console.log(data)
+            navigate(`/trips`)
         })
         .catch(()=> alert(`Fetch error`));
     }
