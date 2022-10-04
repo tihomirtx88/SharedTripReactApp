@@ -1,9 +1,12 @@
-import {Link} from "react-router-dom";
+import { useContext } from "react";
+import { Link } from "react-router-dom";
+import { UserContext } from "../../context/UserProvider";
 
 const Header = () => {
 
+    const { user } = useContext(UserContext);
 
-   
+
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -31,10 +34,9 @@ const Header = () => {
                                     Shared Trips
                                 </Link>
                             </li>
-    
-                            {/* {user.email
-                            //TODO user authentication
-                                ? */}
+
+                            {user.email
+                                ?
                                 <>
                                     <li className="nav-item">
                                         <Link className="nav-link" to="/create">
@@ -46,13 +48,13 @@ const Header = () => {
                                             Profile
                                         </Link>
                                     </li>
-                                    {/* <li className="nav-item">
+                                    <li className="nav-item">
                                         <a className="nav-link" href="logout">
                                             Logout as [ {user.email} ]
                                         </a>
-                                    </li> */}
+                                    </li>
                                 </>
-                                {/* : */}
+                                :
                                 <>
                                     <li className="nav-item">
                                         <Link className="nav-link" to="/login">
@@ -65,6 +67,7 @@ const Header = () => {
                                         </Link>
                                     </li>
                                 </>
+                            }
                         </ul>
                     </div>
                 </div>
@@ -75,3 +78,4 @@ const Header = () => {
 }
 
 export default Header;
+
