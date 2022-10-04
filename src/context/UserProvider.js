@@ -1,38 +1,34 @@
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export const UserContext = createContext()
+export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-    const [user, setUser] = useState({})
-    const navigate = useNavigate()
+    const [user, setUser] = useState({});
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (!user.accessToken) {
-            return
+            return;
         }
-        
+
         localStorage.setItem("userInfo", JSON.stringify(user));
         navigate(`/`);
-    }, [user])
+    }, [user]);
 
     // TO DO WHEN THE PAGE IS INITIALLY LOADED useEffect()
     useEffect(() => {
-
-        JSON.parse(localStorage.getItem("userInfo"));
-
+        setUser(JSON.parse(localStorage.getItem("userInfo")));
     }, []);
-
-
 
     return (
         <UserContext.Provider
             value={{
                 user,
-                setUser: obj => setUser(obj)
+                setUser: (obj) => setUser(obj),
             }}
         >
             {children}
         </UserContext.Provider>
-    )
-}
+    );
+};
