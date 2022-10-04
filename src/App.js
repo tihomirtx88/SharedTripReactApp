@@ -6,6 +6,7 @@ import Home from './Components/Home/Home';
 import Login from './Components/Login/Login';
 import Register from './Components/Register/Register';
 import { UserProvider } from './context/UserProvider';
+import CreateTrip from './createTrip/CreateTrip';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
                <Route path='/' element={<Home />} />
                <Route path='/register' element={<Register />} />
                <Route path='/login' element={<Login />} />
+               <Route path='/create' element={<CreateTrip />} />
           </Routes>
        </main>
      <Footer/>

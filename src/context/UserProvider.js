@@ -18,12 +18,10 @@ export const UserProvider = ({ children }) => {
 
     // TO DO WHEN THE PAGE IS INITIALLY LOADED useEffect()
     useEffect(() => {
-        if (!user.accessToken) {
-            return;
-        }
 
-        return JSON.parse(localStorage.getItem(`userInfo`));
-    }, [user]);
+        JSON.parse(localStorage.getItem("userInfo"));
+
+    }, []);
 
 
 
