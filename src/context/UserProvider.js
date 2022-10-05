@@ -18,14 +18,22 @@ export const UserProvider = ({ children }) => {
 
     // TO DO WHEN THE PAGE IS INITIALLY LOADED useEffect()
     useEffect(() => {
-        setUser(JSON.parse(localStorage.getItem("userInfo")));
+        const localStorageUser = JSON.parse(localStorage.getItem("userInfo"))
+        if (localStorageUser) setUser(localStorageUser);
     }, []);
+
+    const logOut = () => {
+        setUser({})
+        localStorage.removeItem("userInfo")
+        navigate(`/`);
+    }
 
     return (
         <UserContext.Provider
             value={{
                 user,
                 setUser: (obj) => setUser(obj),
+                logOut
             }}
         >
             {children}
