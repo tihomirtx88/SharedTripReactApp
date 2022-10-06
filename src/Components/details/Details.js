@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../../context/UserProvider";
+import { Link } from "react-router-dom";
 
 const Details = () => {
     const [trips, setTrips] = useState([]);
@@ -10,17 +11,19 @@ const Details = () => {
     const { user, logOut } = useContext(UserContext);
     const { tripId } = useParams();
 
-    useEffect(`http://localhost:3030/data/trips`, {})
-        .then((res) => res.json())
-        .then((data) => {
-            console.log(data);
-            if (data.error) {
-                logOut();
-                navigate("/login");
-                return;
-            }
-            setTrips(data);
-        },[]);
+    useEffect(() => {
+        fetch(`http://localhost:3030/data/trips`, {})
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+                if (data.error) {
+                    logOut();
+                    navigate("/login");
+                    return;
+                }
+                setTrips(data);
+            });
+    }, []);
 
     const selectTrip = (tripId) => {
         return trips.find((trip) => trip._id == tripId) || {};
@@ -83,41 +86,38 @@ const Details = () => {
                 </h5>
                 <div className="trip-info">
                     <div>
-                        <img
-                            className="img-fluid rounded"
-                            src={currentTrip.carImg}
-                            alt="car-image"
-                        />
+                        <img className="img-fluid rounded" src={currentTrip.carImg} alt="car-image" />
                     </div>
                     <div className="trip-desc">
                         <h5>Information about the trip</h5>
-                        <textarea 
-                        className="lead" 
-                        disabled=""
-                        value={currentTrip.description}
-                        />
+                        <textarea className="lead" disabled={true} value={currentTrip.description} />
+
                         <h5>
                             Price: <span className="lead">{currentTrip.price}</span> BGN
                         </h5>
-                        { }
-                        {/* if there are no logged in user do not show div with class actions  */}
-                        <div className="actions">
-                            {/* Only for logged user and creator to this trip */}
-                            <a href="" className="btn btn-danger">
-                                Delete this trip
-                            </a>
-                            <a href="" className="btn btn-warning">
-                                Edit this trip
-                            </a>
-                            {/* logged in user with available seats */}
-                            <a href="" className="btn btn-join">
-                                Join now, [ 1 ] seats left!
-                            </a>
-                            {/* logged in user and has already joined the trip  */}
-                            <span className="btn btn-info">Already joined. Don't be late!</span>
-                            {/* logged in user with no available seats */}
-                            <span className="btn btn-secondary">No seats available! [0]</span>
-                        </div>
+                        {user && (
+                            <div className="actions">
+                                {isOwner && (
+                                    <>
+                                        <Link to="" className="btn btn-danger">
+                                            Delete this trip
+                                        </Link>
+                                        <Link to="" className="btn btn-warning">
+                                            Edit this trip
+                                        </Link>
+                                    </>
+                                )}
+
+                                 {/* logged in user with available seats 
+                                <a href="" className="btn btn-join">
+                                    Join now, [ 1 ] seats left!
+                                </a>
+                                 logged in user and has already joined the trip 
+                                <span className="btn btn-info">Already joined. Don't be late!</span>
+                                 logged in user with no available seats 
+                                <span className="btn btn-secondary">No seats available! [0]</span> */}
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
