@@ -24,7 +24,7 @@ function App() {
                <Route path='/logout' element={<LogOut />} />
                <Route path='/create' element={<CreateTrip />} />
                <Route path='/trips' element={<TripCatalog />} />
-               <Route path='/details/:id' element={<Details />} />
+               <Route path='/details/:tripId' element={<Details />} />
           </Routes>
        </main>
      <Footer/>

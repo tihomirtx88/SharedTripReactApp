@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../../context/UserProvider";
 
 const Details = () => {
-    const [trips, setTrips] = useState({});
+    const [trips, setTrips] = useState([]);
     const navigate = useNavigate();
     const { user, logOut } = useContext(UserContext);
     const { tripId } = useParams();
@@ -20,7 +20,7 @@ const Details = () => {
                 return;
             }
             setTrips(data);
-        });
+        },[]);
 
     const selectTrip = (tripId) => {
         return trips.find((trip) => trip._id == tripId) || {};
@@ -94,7 +94,7 @@ const Details = () => {
                         <textarea 
                         className="lead" 
                         disabled=""
-                            defaultValue={currentTrip.description}
+                        value={currentTrip.description}
                         />
                         <h5>
                             Price: <span className="lead">{currentTrip.price}</span> BGN
