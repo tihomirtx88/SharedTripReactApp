@@ -4,6 +4,7 @@ import Footer from './Components/Footer/Footer';
 import Header from './Components/Header/Header';
 import Home from './Components/Home/Home';
 import Login from './Components/Login/Login';
+import LogOut from './Components/logout/LogOut';
 import Register from './Components/Register/Register';
 import TripCatalog from './Components/tripcatalog/TripCatalog';
 import { UserProvider } from './context/UserProvider';
@@ -19,6 +20,7 @@ function App() {
                <Route path='/' element={<Home />} />
                <Route path='/register' element={<Register />} />
                <Route path='/login' element={<Login />} />
+               <Route path='/logout' element={<LogOut />} />
                <Route path='/create' element={<CreateTrip />} />
                <Route path='/trips' element={<TripCatalog />} />
           </Routes>
