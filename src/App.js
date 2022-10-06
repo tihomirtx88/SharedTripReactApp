@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import Details from './Components/details/Details';
 import Footer from './Components/Footer/Footer';
 import Header from './Components/Header/Header';
 import Home from './Components/Home/Home';
@@ -23,6 +24,7 @@ function App() {
                <Route path='/logout' element={<LogOut />} />
                <Route path='/create' element={<CreateTrip />} />
                <Route path='/trips' element={<TripCatalog />} />
+               <Route path='/details/:id' element={<Details />} />
           </Routes>
        </main>
      <Footer/>

@@ -33,6 +33,7 @@ export const UserProvider = ({ children }) => {
             value={{
                 user,
                 setUser: (obj) => setUser(obj),
+                logOut
             }}
         >
             {children}
