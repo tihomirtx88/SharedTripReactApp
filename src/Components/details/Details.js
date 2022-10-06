@@ -102,7 +102,7 @@ const Details = () => {
                                         <Link to="" className="btn btn-danger">
                                             Delete this trip
                                         </Link>
-                                        <Link to="" className="btn btn-warning">
+                                        <Link to={`/details/${currentTrip._id}/edit`} className="btn btn-warning">
                                             Edit this trip
                                         </Link>
                                     </>
