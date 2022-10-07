@@ -11,7 +11,7 @@ const Register = () => {
             body: JSON.stringify(register),
             headers: {
                 "Content-Type": "application/json",
-            },
+            }
         })
             .then((res) => res.json())
             .then((data) => {
