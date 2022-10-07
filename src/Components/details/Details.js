@@ -31,14 +31,15 @@ const Details = () => {
 
     const currentTrip = selectTrip(tripId);
 
-    console.log(currentTrip.buddies, `buddies array`);
-
     const isOwner = currentTrip.owner == user._id;
-    const isEmpty = currentTrip.seats <= 0;
+    const isNotEmpty = currentTrip.seats > 0;
     const seatLeft = currentTrip.seats;
-    const isAlreadyJoin = currentTrip.buddies.includes(user._id);
+    const isAlreadyJoin = currentTrip.buddies?.includes(user._id);
+    console.log(currentTrip);
+    
 
-    const tripDeleteHandler = () => {
+    const tripDeleteHandler = (ev) => {
+        ev.preventDefault();
         const confirmation = window.confirm("Are you sure you want to delete this trip?");
 
         if (confirmation) {
@@ -59,7 +60,8 @@ const Details = () => {
         }
     };
 
-    const onJoinEvent = () => {
+    const onJoinEvent = (ev) => {
+        ev.preventDefault();
         fetch(`http://localhost:3030/data/join/${tripId}`, {
             method: `POST`,
             body: JSON.stringify(trips),
@@ -98,12 +100,12 @@ const Details = () => {
                         </span>
                         <h5>
                             {" "}
-                            <span>2021-07-07</span> at <span>{currentTrip.time}</span>{" "}
+                            <span>2021-07-07</span> at <span>{}</span>{" "}
                         </h5>
                     </div>
                 </div>
                 <p className="line" />
-                {/* <div className="buddies-info">
+                <div className="buddies-info">
                     <i className="fas fa-users buddies" />
                     <h5>Shared trip Buddies</h5>
                      <div>
@@ -114,9 +116,9 @@ const Details = () => {
                     </div> 
                     
                     <h5>
-                        Driver: <span>{user.email}</span>{" "}
+                        Driver: <span>{currentTrip.owner}</span>{" "}
                     </h5>
-                </div> */}
+                </div>
                 <p className="line" />
                 <h5 className="brand">
                     Car Brand: <span className="lead">{currentTrip.carBrand}</span>
@@ -132,7 +134,7 @@ const Details = () => {
                         <h5>
                             Price: <span className="lead">{currentTrip.price}</span> BGN
                         </h5>
-                        {user && (
+                        {user.email && (
                             <div className="actions">
                                 {isOwner ? (
                                     <>
@@ -145,27 +147,29 @@ const Details = () => {
                                     </>
                                 ) : (
                                     <>
-                                        {isEmpty ? (
+                                        {isAlreadyJoin ? (
                                             <>
-                                                <span className="btn btn-secondary">
-                                                    No seats available! [ {seatLeft} ]
-                                                </span>
+                                                <span className="btn btn-info">Already joined. Don't be late!</span>
                                             </>
                                         ) : (
                                             <>
-                                                <button onClick={onJoinEvent} className="btn btn-join">
-                                                    Join now, [ {seatLeft} ] seats left!
-                                                </button>
+                                                {isNotEmpty ? (
+                                                    <>
+                                                        <button onClick={onJoinEvent} className="btn btn-join">
+                                                            Join now, [ {seatLeft} ] seats left!
+                                                        </button>
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <span className="btn btn-secondary">
+                                                            No seats available! [ {seatLeft} ]
+                                                        </span>
+                                                    </>
+                                                )}
                                             </>
                                         )}
                                     </>
-                                )}
-
-                                
-                                {/* <span className="btn btn-info">Already joined. Don't be late!</span> */}
-                                {/* logged in user and has already joined the trip  */}
-                                {/* logged in user with no available seats  */}
-                                {/* logged in user with available seats  */}
+                                )}                         
                             </div>
                         )}
                     </div>
