@@ -15,7 +15,7 @@ const Details = () => {
         fetch(`http://localhost:3030/data/trips`, {})
             .then((res) => res.json())
             .then((data) => {
-                console.log(data);
+                // console.log(data);
                 if (data.error) {
                     logOut();
                     navigate("/login");
@@ -31,16 +31,53 @@ const Details = () => {
 
     const currentTrip = selectTrip(tripId);
 
+    console.log(currentTrip.buddies, `buddies array`);
+
     const isOwner = currentTrip.owner == user._id;
+    const isEmpty = currentTrip.seats <= 0;
+    const seatLeft = currentTrip.seats;
+    const isAlreadyJoin = currentTrip.buddies.includes(user._id);
 
-    // const tripDeleteHandler = () => {
-    //     const confirmation = window.confirm('Are you sure you want to delete this trip?');
+    const tripDeleteHandler = () => {
+        const confirmation = window.confirm("Are you sure you want to delete this trip?");
 
-    //     if (confirmation) {
-    //         useEffect(`http://localhost:3030/data/trips/${tripId}`, {method: `DELETE`})
-    //             .then((res) => res.json())
-    //       }
-    // }
+        if (confirmation) {
+            fetch(`http://localhost:3030/data/trips/${tripId}`, {
+                method: `DELETE`,
+                headers: {
+                    "X-Authorization": user.accessToken,
+                    "Content-Type": "application/json",
+                },
+            })
+                .then((res) => {
+                    if (res.status !== 204) {
+                        throw Error();
+                    }
+                    navigate(`/`);
+                })
+                .catch(() => alert(`TODO`));
+        }
+    };
+
+    const onJoinEvent = () => {
+        fetch(`http://localhost:3030/data/join/${tripId}`, {
+            method: `POST`,
+            body: JSON.stringify(trips),
+            headers: {
+                "Content-Type": "application/json",
+                "X-Authorization": user.accessToken,
+            },
+        })
+            .then((res) => {
+                console.log(res);
+            })
+            // .then((data) => {
+
+            //     setTrips(data);
+            // })
+            .catch(() => alert(`TODO from join`));
+        // console.log(trips, `ot trips`);
+    };
 
     return (
         <section className="py-5 details" id="trip-details-page">
@@ -97,25 +134,38 @@ const Details = () => {
                         </h5>
                         {user && (
                             <div className="actions">
-                                {isOwner && (
+                                {isOwner ? (
                                     <>
-                                        <Link to="" className="btn btn-danger">
+                                        <button onClick={tripDeleteHandler} className="btn btn-danger">
                                             Delete this trip
-                                        </Link>
+                                        </button>
                                         <Link to={`/details/${currentTrip._id}/edit`} className="btn btn-warning">
                                             Edit this trip
                                         </Link>
                                     </>
+                                ) : (
+                                    <>
+                                        {isEmpty ? (
+                                            <>
+                                                <span className="btn btn-secondary">
+                                                    No seats available! [ {seatLeft} ]
+                                                </span>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <button onClick={onJoinEvent} className="btn btn-join">
+                                                    Join now, [ {seatLeft} ] seats left!
+                                                </button>
+                                            </>
+                                        )}
+                                    </>
                                 )}
 
-                                 {/* logged in user with available seats 
-                                <a href="" className="btn btn-join">
-                                    Join now, [ 1 ] seats left!
-                                </a>
-                                 logged in user and has already joined the trip 
-                                <span className="btn btn-info">Already joined. Don't be late!</span>
-                                 logged in user with no available seats 
-                                <span className="btn btn-secondary">No seats available! [0]</span> */}
+                                
+                                {/* <span className="btn btn-info">Already joined. Don't be late!</span> */}
+                                {/* logged in user and has already joined the trip  */}
+                                {/* logged in user with no available seats  */}
+                                {/* logged in user with available seats  */}
                             </div>
                         )}
                     </div>

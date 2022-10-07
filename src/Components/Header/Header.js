@@ -49,7 +49,7 @@ const Header = () => {
                                         </Link>
                                     </li>
                                     <li className="nav-item">
-                                        <a className="nav-link" href="logout">
+                                        <a className="nav-link" href="/logout">
                                             Logout as [ {user.email} ]
                                         </a>
                                     </li>
