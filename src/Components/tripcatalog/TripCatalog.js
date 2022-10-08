@@ -15,7 +15,7 @@ const TripCatalog = () => {
         fetch(`http://localhost:3030/data/trips`, {})
             .then((res) => res.json())
             .then((data) => {
-                console.log(data);
+                // console.log(data);
                 navigate(`/trips`);
                 setTrips(data);
             });

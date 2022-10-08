@@ -1,5 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import Details from './Components/details/Details';
+import EdiTrip from './Components/edit/EditTrip';
 import Footer from './Components/Footer/Footer';
 import Header from './Components/Header/Header';
 import Home from './Components/Home/Home';
@@ -23,6 +25,8 @@ function App() {
                <Route path='/logout' element={<LogOut />} />
                <Route path='/create' element={<CreateTrip />} />
                <Route path='/trips' element={<TripCatalog />} />
+               <Route path='/details/:tripId' element={<Details />} />
+               <Route path='/details/:tripId/edit' element={<EdiTrip />} />
           </Routes>
        </main>
      <Footer/>

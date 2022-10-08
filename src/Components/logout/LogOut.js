@@ -1,4 +1,5 @@
-import { useContext, useEffect } from "react"
+import { useEffect } from "react"
+import { useContext } from "react"
 import { UserContext } from "../../context/UserProvider"
 
 const LogOut = () => {
