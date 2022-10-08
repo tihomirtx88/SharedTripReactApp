@@ -25,7 +25,6 @@ export const UserProvider = ({ children }) => {
     const logOut = () => {
         setUser({})
         localStorage.removeItem("userInfo")
-        navigate(`/`);
     }
 
     return (
