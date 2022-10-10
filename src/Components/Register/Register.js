@@ -1,5 +1,38 @@
-import { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+const FormGroup = ({ labelText, inputType, inputId, placeholder, inputName, value, handleOnChange }) => (
+    <div className="form-group">
+        <label htmlFor="email">{labelText}</label>
+        <input
+            type={inputType}
+            className="form-control"
+            id={inputId}
+            placeholder={placeholder}
+            name={inputName}
+            value={value || ""}
+            onChange={handleOnChange}
+        />
+    </div>
+);
+
+const FormGroupText = React.memo(() => {
+    return (
+        <div className="form-group">
+            <p>
+                Already have account? <a href="/login">Login Now!</a>
+            </p>
+        </div>
+    );
+});
+
+const Submitbutton = React.memo(() => {
+    return (
+        <button type="submit" className="btn btn-primary">
+            Submit
+        </button>
+    );
+});
 
 const Register = () => {
     const [register, setRegister] = useState({});
@@ -11,7 +44,7 @@ const Register = () => {
             body: JSON.stringify(register),
             headers: {
                 "Content-Type": "application/json",
-            }
+            },
         })
             .then((res) => res.json())
             .then((data) => {
@@ -24,11 +57,11 @@ const Register = () => {
         ev.preventDefault();
         if (register.password !== register.rePassword) {
             alert(`Password and repassword dont match`);
-            return
+            return;
         }
         if (register.email === "" || register.password === "") {
             alert(`All fields are reqired`);
-            return
+            return;
         }
         fetchRegister();
     };
@@ -46,42 +79,36 @@ const Register = () => {
                 <h1>Register</h1>
                 <div className="register">
                     <form onSubmit={onSubmit} action="" method="">
-                        <div className="form-group">
-                            <label htmlFor="email">Email address</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="email"
-                                placeholder="Enter email"
-                                name="email"
-                                value={register.email || ""}
-                                onChange={changeHandler}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="password">Password</label>
-                            <input
-                                type="password"
-                                className="form-control"
-                                id="password"
-                                placeholder="Password"
-                                name="password"
-                                value={register.password || ""}
-                                onChange={changeHandler}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="rePassword">Re-Password</label>
-                            <input
-                                type="password"
-                                className="form-control"
-                                id="rePassword"
-                                placeholder="Re-Password"
-                                name="rePassword"
-                                value={register.rePassword || ""}
-                                onChange={changeHandler}
-                            />
-                        </div>
+                        <FormGroup
+                            inputType="text"
+                            labelText="Email address"
+                            inputId="email"
+                            placeholder="Enter email"
+                            inputName="email"
+                            value={register.email}
+                            handleOnChange={changeHandler}
+                        />
+
+                        <FormGroup
+                            inputType="text"
+                            labelText="Password"
+                            inputId="password"
+                            placeholder="Password"
+                            inputName="password"
+                            value={register.password}
+                            handleOnChange={changeHandler}
+                        />
+
+                        <FormGroup
+                            inputType="password"
+                            labelText="Re-Password"
+                            inputId="rePassword"
+                            placeholder="Re-Password"
+                            inputName="rePassword"
+                            value={register.rePassword}
+                            handleOnChange={changeHandler}
+                        />
+
                         <label>Gender</label>
                         <div className="gender">
                             <input
@@ -103,14 +130,8 @@ const Register = () => {
                             />
                             <label htmlFor="male">Male</label>
                         </div>
-                        <div className="form-group">
-                            <p>
-                                Already have account? <a href="/login">Login Now!</a>
-                            </p>
-                        </div>
-                        <button type="submit" className="btn btn-primary">
-                            Submit
-                        </button>
+                        <FormGroupText />
+                        <Submitbutton />
                     </form>
                 </div>
             </div>

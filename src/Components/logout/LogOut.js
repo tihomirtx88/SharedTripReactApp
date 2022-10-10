@@ -8,10 +8,12 @@ const LogOut = () => {
     const fetchLogOut = () => {
         fetch(`http://localhost:3030/users/logout`)
             .then(resp => {
-                if (resp.status === 204) {
-                    logOut()
+                if (!resp.status === 204) {
+                    throw Error();
                 }
+                logOut()
             })
+            .catch(() => alert("Unsuccesful logout!"))
     }
 
     useEffect(() => {

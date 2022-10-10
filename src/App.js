@@ -7,6 +7,7 @@ import Header from './Components/Header/Header';
 import Home from './Components/Home/Home';
 import Login from './Components/Login/Login';
 import LogOut from './Components/logout/LogOut';
+import Profile from './Components/profile/Profile';
 import Register from './Components/Register/Register';
 import TripCatalog from './Components/tripcatalog/TripCatalog';
 import { UserProvider } from './context/UserProvider';
@@ -25,6 +26,7 @@ function App() {
                <Route path='/logout' element={<LogOut />} />
                <Route path='/create' element={<CreateTrip />} />
                <Route path='/trips' element={<TripCatalog />} />
+               <Route path='/profile' element={<Profile />} />
                <Route path='/details/:tripId' element={<Details />} />
                <Route path='/details/:tripId/edit' element={<EdiTrip />} />
           </Routes>
