@@ -54,7 +54,7 @@ const Details = () => {
     }, [trip]);
 
     const tripDeleteHandler = (ev) => {
-        ev.preventDefault();
+       
         const confirmation = window.confirm("Are you sure you want to delete this trip?");
 
         if (confirmation) {
@@ -96,7 +96,7 @@ const Details = () => {
         <section className="py-5 details" id="trip-details-page">
             <div className="container">
                 {isLoading ? (
-                    <div>Loading</div>
+                    <div className="loader"></div>
                 ) : (
                     <>
                         <div className="destination">
@@ -127,6 +127,7 @@ const Details = () => {
                                 {trip.buddies?.length > 0 ? (
                                     <>
                                         {emailsInfo.map((email) => (
+                                            
                                             <div>{email} </div>
                                         ))}
                                     </>

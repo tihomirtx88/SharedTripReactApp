@@ -32,8 +32,6 @@ const Profile = () => {
     return (
         <section className="profile col-md-6 text-center col-lg" id="profile-page">
             <div className="profile-container">
-                {/* Do not forget to change the path to the image */}
-                {/* Gender of the user determines which picture is displayed as their avatar */}
                 <img className="profile-img" src="/static/images/male.png" />
                 <p>
                     Email: <span>{user.email}</span>
@@ -44,7 +42,6 @@ const Profile = () => {
                     Trips History: <span>{tripInfo.length}</span> counts
                 </p>
                 <div className="trips-info">
-                    {/* If there are trips created by the current logged in user display each of them */}
                     {tripInfo.length > 0 ? (
                         tripInfo.map((trip) => <SingleTripProfile key={trip._id} trip={trip} />)
                     ) : (
