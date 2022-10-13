@@ -1,7 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { UserContext } from "../../context/UserProvider";
 import { Formik, ErrorMessage } from "formik";
 import * as Yup from "yup";
+
+
 
 const FormGroup = ({ labelText, inputType, inputId, placeholder, inputName, value, handleOnChange, handleOnBlur }) => (
     <div className="form-group">
@@ -21,7 +23,6 @@ const FormGroup = ({ labelText, inputType, inputId, placeholder, inputName, valu
 );
 
 const FormGroupText = React.memo(() => {
-    console.log("render text");
     return (
         <div className="form-group">
             <p>
@@ -38,8 +39,8 @@ const SubmitButton = React.memo(() => (
 ));
 
 const Login = () => {
-    console.log("render main component");
     const { setUser } = useContext(UserContext);
+
 
     const fetchLogin = (values) => {
         fetch(`http://localhost:3030/users/login`, {
@@ -56,7 +57,7 @@ const Login = () => {
                 }
                 setUser(data)
             })
-            .catch(() => alert(`Wrong email or password`));
+            .catch(() => alert(`todo`));
     };
 
     const createSchema = Yup.object().shape({

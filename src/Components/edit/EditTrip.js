@@ -1,14 +1,24 @@
 import { useContext } from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../../context/UserProvider";
 
 const EdiTrip = () => {
-    const { user } = useContext( UserContext );
+    const { user } = useContext(UserContext);
 
-    const [editInfo, setEditInfo] = useState( {});
+    const [editInfo, setEditInfo] = useState({});
     const navigate = useNavigate();
     const { tripId } = useParams();
+
+    useEffect(() => {
+        fetch(`http://localhost:3030/data/trips/${tripId}`, {})
+            .then((res) => res.json())
+            .then((data) => {
+                setEditInfo(data);
+            })
+            .catch(() => alert(`Wrong fetch request`));
+    }, []);
 
     const fetchEdit = () => {
         fetch(`http://localhost:3030/data/trips/${tripId}`, {
@@ -21,14 +31,11 @@ const EdiTrip = () => {
         })
             .then((res) => res.json())
             .then((data) => {
-               
                 if (data.error) {
                     throw Error();
                 }
                 setEditInfo(data);
-                console.log(editInfo);
                 navigate(`/details/${tripId}`);
-                
             })
             .catch(() => alert(`Cannot fetch`));
     };
@@ -39,7 +46,6 @@ const EdiTrip = () => {
             [ev.target.name]: ev.target.value,
         });
     };
-    
 
     const onSubmit = (ev) => {
         ev.preventDefault();
@@ -61,7 +67,6 @@ const EdiTrip = () => {
 
         fetchEdit();
     };
-    console.log(editInfo);
 
     return (
         <section className="py-5" id="edit-trip-page">

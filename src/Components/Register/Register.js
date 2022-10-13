@@ -1,7 +1,8 @@
-import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Formik, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import useAlert from "../../context/useAlert";
+
 
 const FormGroup = ({ labelText, inputType, inputId, placeholder, inputName, value, handleOnChange, handleOnBlur }) => (
     <div className="form-group">
@@ -45,7 +46,7 @@ const GenderGroup = ({
     </>
 );
 
-const FormGroupText = React.memo(() => {
+const FormGroupText = () => {
     return (
         <div className="form-group">
             <p>
@@ -53,18 +54,19 @@ const FormGroupText = React.memo(() => {
             </p>
         </div>
     );
-});
+};
 
-const Submitbutton = React.memo(() => {
+const Submitbutton = () => {
     return (
         <button type="submit" className="btn btn-primary">
             Submit
         </button>
     );
-});
+};
 
 const Register = () => {
     const navigate = useNavigate();
+    const { setAlert } = useAlert()
 
     const fetchRegister = (values) => {
         fetch(`http://localhost:3030/users/register`, {
@@ -77,8 +79,8 @@ const Register = () => {
             .then((res) => res.json())
             .then((data) => {
                 navigate(`/`);
-                console.log(data);
-            });
+            })
+            .catch(() => setAlert(`Wrong register fetch`));
     };
 
     const createSchema = Yup.object().shape({
@@ -146,15 +148,6 @@ const Register = () => {
 
                                 <label>Gender</label>
                                 <div className="gender">
-                                    {/* <input
-                                        type="radio"
-                                        id="female"
-                                        name="gender"
-                                        value="female"
-                                        checked={formik.values.gender == "female"}
-                                        handleOnBlur={formik.handleBlur}
-                                    />
-                                    <label htmlFor="female">Female</label> */}
                                     <GenderGroup
                                         inputType="radio"
                                         inputId="female"
@@ -175,16 +168,6 @@ const Register = () => {
                                         handleOnBlur={formik.handleBlur}
                                         labelText="Male"
                                     />
-                                    {/* <input
-                                        type="radio"
-                                        id="male"
-                                        name="gender"
-                                        value="male"
-                                        checked={formik.values.gender == "male"}
-                                        handleOnChange={formik.handleChange}
-                                        handleOnBlur={formik.handleBlur}
-                                    />
-                                    <label htmlFor="male">Male</label> */}
                                 </div>
                                 <FormGroupText />
                                 <Submitbutton />

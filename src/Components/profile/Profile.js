@@ -17,22 +17,25 @@ const Profile = () => {
         })
             .then((res) => res.json())
             .then((data) => {
-                // console.log(data);
-                if (data.error) {
-                    logOut();
-                    return;
-                }
                 setTripInfo(data);
             })
             .catch(() => alert(`Wrong fetch request`));
     }, []);
-
-    console.log(tripInfo);
+    console.log(user.gender);
 
     return (
         <section className="profile col-md-6 text-center col-lg" id="profile-page">
             <div className="profile-container">
-                <img className="profile-img" src="/static/images/male.png" />
+                {user.gender == `male` ? (
+                    <>
+                        <img className="profile-img" src={process.env.PUBLIC_URL + "/images/male.png"}/>
+                        
+                    </>
+                ) : (
+                    <>
+                        <img className="profile-img" src={process.env.PUBLIC_URL + "/images/female.png"}/>
+                    </>
+                )}
                 <p>
                     Email: <span>{user.email}</span>
                 </p>

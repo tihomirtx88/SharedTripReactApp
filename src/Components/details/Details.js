@@ -18,28 +18,33 @@ const Details = () => {
 
     const [isLoading, setIsLoading] = useState(false);
 
+    const fetchTrip = () => {
+        fetch(`http://localhost:3030/data/trips/${tripId}`, {})
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.error) {
+                    logOut();
+                    return;
+                }
+                setTrip(data);
+            })
+            .finally(() => setIsLoading(false));
+    };
+
+    const fetchBuddies = () => {
+        fetch(`http://localhost:3030/data/trips/buddies/${tripId}`, {})
+            .then((res) => res.json())
+            .then((data) => {
+                setEmailsInfo(data);
+            })
+            .finally(() => setIsLoading(false));
+    };
+
     useEffect(() => {
         setIsLoading(true);
         setTimeout(() => {
-            fetch(`http://localhost:3030/data/trips/${tripId}`, {})
-                .then((res) => res.json())
-                .then((data) => {
-                    // console.log(data);
-                    if (data.error) {
-                        logOut();
-                        return;
-                    }
-                    setTrip(data);
-                })
-                .finally(() => setIsLoading(false));
-
-            fetch(`http://localhost:3030/data/trips/buddies/${tripId}`, {})
-                .then((res) => res.json())
-                .then((data) => {
-                    setEmailsInfo(data);
-                    console.log(data);
-                })
-                .finally(() => setIsLoading(false));
+            fetchTrip();
+            fetchBuddies();
         }, 5000);
     }, []);
 
@@ -54,7 +59,6 @@ const Details = () => {
     }, [trip]);
 
     const tripDeleteHandler = (ev) => {
-       
         const confirmation = window.confirm("Are you sure you want to delete this trip?");
 
         if (confirmation) {
@@ -127,7 +131,6 @@ const Details = () => {
                                 {trip.buddies?.length > 0 ? (
                                     <>
                                         {emailsInfo.map((email) => (
-                                            
                                             <div>{email} </div>
                                         ))}
                                     </>
