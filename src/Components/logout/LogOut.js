@@ -9,7 +9,7 @@ const LogOut = () => {
         fetch(`http://localhost:3030/users/logout`)
             .then(resp => {
                 if (!resp.status === 204) {
-                    throw Error()
+                    throw Error();
                 }
                 logOut()
             })

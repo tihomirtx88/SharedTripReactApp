@@ -16,7 +16,6 @@ export const UserProvider = ({ children }) => {
         navigate(`/`);
     }, [user]);
 
-    // TO DO WHEN THE PAGE IS INITIALLY LOADED useEffect()
     useEffect(() => {
         const localStorageUser = JSON.parse(localStorage.getItem("userInfo"))
         if (localStorageUser) setUser(localStorageUser);

@@ -1,24 +1,24 @@
 import { useContext } from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../../context/UserProvider";
 
 const EdiTrip = () => {
-    const {user } = useContext(UserContext);
+    const { user } = useContext(UserContext);
 
-    const [editInfo, setEditInfo] = useState({
-        start: "",
-        end: "",
-        date: "",
-        time: "",
-        carImg: "",
-        carBrand: "",
-        seats: "",
-        price: "",
-        description: ""
-    });
+    const [editInfo, setEditInfo] = useState({});
     const navigate = useNavigate();
-    const {tripId} = useParams();
+    const { tripId } = useParams();
+
+    useEffect(() => {
+        fetch(`http://localhost:3030/data/trips/${tripId}`, {})
+            .then((res) => res.json())
+            .then((data) => {
+                setEditInfo(data);
+            })
+            .catch(() => alert(`Wrong fetch request`));
+    }, []);
 
     const fetchEdit = () => {
         fetch(`http://localhost:3030/data/trips/${tripId}`, {
@@ -26,21 +26,19 @@ const EdiTrip = () => {
             body: JSON.stringify(editInfo),
             headers: {
                 "Content-Type": "application/json",
-                "X-Authorization": user.accessToken
-            }
+                "X-Authorization": user.accessToken,
+            },
         })
-        .then((res) => res.json())
-            .then((data) => {        
+            .then((res) => res.json())
+            .then((data) => {
                 if (data.error) {
                     throw Error();
                 }
+                setEditInfo(data);
                 navigate(`/details/${tripId}`);
-                console.log(data);
             })
-            .catch(
-               () => alert(`Cannot fetch`)
-            );
-    }
+            .catch(() => alert(`Cannot fetch`));
+    };
 
     const changeHandler = (ev) => {
         setEditInfo({
@@ -52,15 +50,23 @@ const EdiTrip = () => {
     const onSubmit = (ev) => {
         ev.preventDefault();
 
-        if (editInfo.start === "" || editInfo.end === "" || editInfo.date === "" 
-        || editInfo.time === "" || editInfo.carImg === "" || editInfo.carBrand === ""
-        || editInfo.seats === "" || editInfo.price === "" || editInfo.description === "") {
+        if (
+            editInfo.start === "" ||
+            editInfo.end === "" ||
+            editInfo.date === "" ||
+            editInfo.time === "" ||
+            editInfo.carImg === "" ||
+            editInfo.carBrand === "" ||
+            editInfo.seats === "" ||
+            editInfo.price === "" ||
+            editInfo.description === ""
+        ) {
             alert(`All fields are reqired`);
-            return
+            return;
         }
 
         fetchEdit();
-    }
+    };
 
     return (
         <section className="py-5" id="edit-trip-page">
@@ -79,22 +85,23 @@ const EdiTrip = () => {
                             </label>
                         </div>
                         <div className="form-group edit-input">
-                            <input type="text" 
-                            className="form-control-2" 
-                            id="startPoint" 
-                            name="start" 
-                            value={editInfo.start || ""}
-                            onChange={changeHandler}
+                            <input
+                                type="text"
+                                className="form-control-2"
+                                id="startPoint"
+                                name="start"
+                                value={editInfo.start || ""}
+                                onChange={changeHandler}
                             />
 
-                            <input type="text" 
-                            className="form-control-2" 
-                            id="endPoint" 
-                            name="end" 
-                            value={editInfo.end || ""}
-                            onChange={changeHandler}
+                            <input
+                                type="text"
+                                className="form-control-2"
+                                id="endPoint"
+                                name="end"
+                                value={editInfo.end || ""}
+                                onChange={changeHandler}
                             />
-
                         </div>
                         <div className="edit-label">
                             <label htmlFor="date">
@@ -107,40 +114,45 @@ const EdiTrip = () => {
                             </label>
                         </div>
                         <div className="form-group edit-input">
-                            <input type="text" 
-                            className="form-control-2" 
-                            id="date" 
-                            name="date" 
-                            value={editInfo.date || ""}
-                            onChange={changeHandler}/>
+                            <input
+                                type="text"
+                                className="form-control-2"
+                                id="date"
+                                name="date"
+                                value={editInfo.date || ""}
+                                onChange={changeHandler}
+                            />
 
-                            <input type="text" 
-                            className="form-control-2" 
-                            id="time" 
-                            name="time" 
-                            value={editInfo.time || ""}
-                            onChange={changeHandler} />
-
+                            <input
+                                type="text"
+                                className="form-control-2"
+                                id="time"
+                                name="time"
+                                value={editInfo.time || ""}
+                                onChange={changeHandler}
+                            />
                         </div>
                         <div className="edit-label">
                             <label htmlFor="carImage">Car Image</label>
                             <label htmlFor="carBrand">Car Brand</label>
                         </div>
                         <div className="form-group edit-input">
-                            <input type="text" 
-                            className="form-control-2" 
-                            id="carImage" 
-                            name="carImg" 
-                            value={editInfo.carImg || ""}
-                            onChange={changeHandler}
+                            <input
+                                type="text"
+                                className="form-control-2"
+                                id="carImage"
+                                name="carImg"
+                                value={editInfo.carImg || ""}
+                                onChange={changeHandler}
                             />
 
-                            <input type="text" 
-                            className="form-control-2" 
-                            id="carBrand" 
-                            name="carBrand" 
-                            value={editInfo.carBrand || ""}
-                            onChange={changeHandler}
+                            <input
+                                type="text"
+                                className="form-control-2"
+                                id="carBrand"
+                                name="carBrand"
+                                value={editInfo.carBrand || ""}
+                                onChange={changeHandler}
                             />
                         </div>
                         <div className="edit-label">
@@ -148,29 +160,32 @@ const EdiTrip = () => {
                             <label htmlFor="price">Price</label>
                         </div>
                         <div className="form-group edit-input">
-                            <input type="text" 
-                            className="form-control-2" 
-                            id="seats"
-                            name="seats" 
-                            value={editInfo.seats || ""}
-                            onChange={changeHandler} />
+                            <input
+                                type="text"
+                                className="form-control-2"
+                                id="seats"
+                                name="seats"
+                                value={editInfo.seats || ""}
+                                onChange={changeHandler}
+                            />
 
-                            <input type="text" 
-                            className="form-control-2" 
-                            id="price" 
-                            name="price" 
-                            value={editInfo.price || ""}
-                            onChange={changeHandler} />
-
+                            <input
+                                type="text"
+                                className="form-control-2"
+                                id="price"
+                                name="price"
+                                value={editInfo.price || ""}
+                                onChange={changeHandler}
+                            />
                         </div>
                         <div className="form-group">
                             <label htmlFor="description">Description</label>
-                            <textarea className="form-control" 
-                            id="description" 
-                            name="description" 
-                            value={editInfo.description || ""}
-                            onChange={changeHandler} 
-
+                            <textarea
+                                className="form-control"
+                                id="description"
+                                name="description"
+                                value={editInfo.description || ""}
+                                onChange={changeHandler}
                             />
                         </div>
                         <button type="submit" className="btn btn-primary">

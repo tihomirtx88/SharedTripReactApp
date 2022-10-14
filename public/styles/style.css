@@ -7,7 +7,7 @@ body {
 
 body::before {
   content: "";
-  background: linear-gradient(rgba(0, 0, 0, 0.76), rgba(0, 0, 0, 0.5)), url('https://sc.6tupian.com/wp-content/uploads/2021/02/1613417565-f9f677ddb0fab5f.jpg');
+  background: linear-gradient(rgba(0, 0, 0, 0.76), rgba(0, 0, 0, 0.5)), url('https://www.mitsubishicars.com/content/dam/mitsubishi-motors-us/images/siteimages/seo-images/up-to-speed/Mitsubishi-Lancer-Hero-fb.jpg');
   background-size: cover;
   background-position: center;
   position: absolute;
@@ -15,6 +15,17 @@ body::before {
   right: 0px;
   bottom: 0px;
   left: 0px;
+}
+
+.loader{
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  background: 
+     url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHulOVP_1Lbib9kL2VIcwG3PnFCRgt-iKeIg&usqp=CAU") center no-repeat;
+     
+  z-index: 1;
 }
 
 main {

@@ -1,22 +1,14 @@
 import { useState } from "react";
 import { useEffect } from "react";
-import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import { UserContext } from "../../context/UserProvider";
 import SingleTrip from "./singletrip/SingleTrip";
 
 const TripCatalog = () => {
-    
-    const navigate = useNavigate();
-
     const [trips, setTrips] = useState([]);
 
     useEffect(() => {
         fetch(`http://localhost:3030/data/trips`, {})
             .then((res) => res.json())
             .then((data) => {
-                // console.log(data);
-                navigate(`/trips`);
                 setTrips(data);
             });
     }, []);

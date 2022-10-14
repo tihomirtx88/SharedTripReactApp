@@ -14,23 +14,37 @@ const Details = () => {
     const [isEmpty, setIsEmpty] = useState();
     const [availableSeats, setAvailableSeats] = useState(0);
     const [isJoined, setIsJoined] = useState(false);
+    const [emailsInfo, setEmailsInfo] = useState([]);
 
     const [isLoading, setIsLoading] = useState(false);
+
+    const fetchTrip = () => {
+        fetch(`http://localhost:3030/data/trips/${tripId}`, {})
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.error) {
+                    logOut();
+                    return;
+                }
+                setTrip(data);
+            })
+            .finally(() => setIsLoading(false));
+    };
+
+    const fetchBuddies = () => {
+        fetch(`http://localhost:3030/data/trips/buddies/${tripId}`, {})
+            .then((res) => res.json())
+            .then((data) => {
+                setEmailsInfo(data);
+            })
+            .finally(() => setIsLoading(false));
+    };
 
     useEffect(() => {
         setIsLoading(true);
         setTimeout(() => {
-            fetch(`http://localhost:3030/data/trips/${tripId}`, {})
-                .then((res) => res.json())
-                .then((data) => {
-                    console.log(data);
-                    if (data.error) {
-                        logOut();
-                        return;
-                    }
-                    setTrip(data);
-                })
-                .finally(() => setIsLoading(false));
+            fetchTrip();
+            fetchBuddies();
         }, 5000);
     }, []);
 
@@ -45,7 +59,6 @@ const Details = () => {
     }, [trip]);
 
     const tripDeleteHandler = (ev) => {
-        ev.preventDefault();
         const confirmation = window.confirm("Are you sure you want to delete this trip?");
 
         if (confirmation) {
@@ -87,7 +100,7 @@ const Details = () => {
         <section className="py-5 details" id="trip-details-page">
             <div className="container">
                 {isLoading ? (
-                    <div>Loading</div>
+                    <div className="loader"></div>
                 ) : (
                     <>
                         <div className="destination">
@@ -115,15 +128,16 @@ const Details = () => {
                             <i className="fas fa-users buddies" />
                             <h5>Shared trip Buddies</h5>
                             <div>
-                                if there are joined buddies for the current trip separate them with comma and space", "
-                                <p>peter@abv.bg, marry@abv.bg</p>
-                                If not display:
-                                <p>there are no buddies yet...</p>
+                                {trip.buddies?.length > 0 ? (
+                                    <>
+                                        {emailsInfo.map((email) => (
+                                            <div>{email} </div>
+                                        ))}
+                                    </>
+                                ) : (
+                                    <p>there are no buddies yet...</p>
+                                )}
                             </div>
-
-                            <h5>
-                                Driver: <span>{trip.owner}</span>{" "}
-                            </h5>
                         </div>
                         <p className="line" />
                         <h5 className="brand">

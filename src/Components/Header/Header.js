@@ -3,25 +3,15 @@ import { Link } from "react-router-dom";
 import { UserContext } from "../../context/UserProvider";
 
 const Header = () => {
-
     const { user } = useContext(UserContext);
-
 
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
                 <div className="container">
-                    <img
-                        className="logo"
-                        src={process.env.PUBLIC_URL + '/images/before.png'}
-                        alt="before-logo"
-                    />
-                    <img
-                        className="car logo"
-                        src={process.env.PUBLIC_URL + '/images/trip-logo.png'}
-                        alt="trip-logo"
-                    />
-                    <img className="logo" src={process.env.PUBLIC_URL + '/images/after.png'} alt="after-logo" />
+                    <img className="logo" src={process.env.PUBLIC_URL + "/images/before.png"} alt="before-logo" />
+                    <img className="car logo" src={process.env.PUBLIC_URL + "/images/trip-logo.png"} alt="trip-logo" />
+                    <img className="logo" src={process.env.PUBLIC_URL + "/images/after.png"} alt="after-logo" />
                     <div className="collapse navbar-collapse" id="navbarResponsive">
                         <ul className="navbar-nav ml-auto">
                             <li className="nav-item">
@@ -35,8 +25,7 @@ const Header = () => {
                                 </Link>
                             </li>
 
-                            {user.email
-                                ?
+                            {user.email ? (
                                 <>
                                     <li className="nav-item">
                                         <Link className="nav-link" to="/create">
@@ -54,7 +43,7 @@ const Header = () => {
                                         </a>
                                     </li>
                                 </>
-                                :
+                            ) : (
                                 <>
                                     <li className="nav-item">
                                         <Link className="nav-link" to="/login">
@@ -67,15 +56,13 @@ const Header = () => {
                                         </Link>
                                     </li>
                                 </>
-                            }
+                            )}
                         </ul>
                     </div>
                 </div>
             </nav>
         </>
-
-    )
-}
+    );
+};
 
 export default Header;
-
