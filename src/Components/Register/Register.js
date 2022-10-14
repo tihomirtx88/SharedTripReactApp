@@ -1,7 +1,10 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Formik, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import useAlert from "../../context/useAlert";
+import Popup from "reactjs-popup";
+import AlertPopUpD from "../../context/AlertPopupD";
+
 
 
 const FormGroup = ({ labelText, inputType, inputId, placeholder, inputName, value, handleOnChange, handleOnBlur }) => (
@@ -66,21 +69,31 @@ const Submitbutton = () => {
 
 const Register = () => {
     const navigate = useNavigate();
-    const { setAlert } = useAlert()
+    const [open, setOpen] = useState(false);
+    const closeModal = () => setOpen(false);
+    const [errorMessage, setErrorMessage] = useState("")
 
     const fetchRegister = (values) => {
-        fetch(`http://localhost:3030/users/register`, {
+        fetch(`http://localhost:3030/users/registerr`, {
             method: `POST`,
             body: JSON.stringify(values),
             headers: {
                 "Content-Type": "application/json",
             },
         })
-            .then((res) => res.json())
+            .then((res) => {
+                if (!res.ok) {
+                    throw Error({ message: "Bad Request!" })
+                }
+                return res.json()
+            })
             .then((data) => {
                 navigate(`/`);
             })
-            .catch(() => setAlert(`Wrong register fetch`));
+            .catch((error) => {
+                setErrorMessage(error?.message || "Fetch error!")
+                setOpen(true)
+            });
     };
 
     const createSchema = Yup.object().shape({
@@ -176,6 +189,12 @@ const Register = () => {
                     </Formik>
                 </div>
             </div>
+            <AlertPopUpD
+                open={open}
+                closeModal={closeModal}
+            >
+                {errorMessage}
+            </AlertPopUpD>
         </section>
     );
 };

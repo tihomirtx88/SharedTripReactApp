@@ -7,6 +7,7 @@ import Header from "./Components/header/Header";
 import Home from "./Components/home/Home";
 import Login from "./Components/login/Login";
 import LogOut from "./Components/logout/LogOut";
+import AlertPopUp from "./Components/popupalert/AlertPopUp";
 import Profile from "./Components/profile/Profile";
 import Register from "./Components/register/Register";
 import TripCatalog from "./Components/tripcatalog/TripCatalog";
@@ -18,22 +19,32 @@ function App() {
     return (
         <UserProvider>
             <Header />
-            <AlertProvider>
-                <main>
-                    <Routes>
-                        {/* <Route path="/" element={<AlertPopUp />} /> */}
-                        <Route path="/" element={<Home />} />
-                        <Route path="/register" element={<Register />} />
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/logout" element={<LogOut />} />
-                        <Route path="/create" element={<CreateTrip />} />
-                        <Route path="/trips" element={<TripCatalog />} />
-                        <Route path="/profile" element={<Profile />} />
-                        <Route path="/details/:tripId" element={<Details />} />
-                        <Route path="/details/:tripId/edit" element={<EdiTrip />} />
-                    </Routes>
-                </main>
-            </AlertProvider>
+                <AlertProvider>
+                    <main>
+                        <Routes>
+                            {/* <Route path="/" element={<AlertPopUp />} /> */}
+                            <Route path="/" element={
+                                <>
+                                    <Home />
+                                    <AlertPopUp />
+                                </>
+                            } />
+                            <Route path="/register" element={
+                                <>
+                                    
+                                    <Register />
+                                </>
+                            } />
+                            <Route path="/login" element={<Login />} />
+                            <Route path="/logout" element={<LogOut />} />
+                            <Route path="/create" element={<CreateTrip />} />
+                            <Route path="/trips" element={<TripCatalog />} />
+                            <Route path="/profile" element={<Profile />} />
+                            <Route path="/details/:tripId" element={<Details />} />
+                            <Route path="/details/:tripId/edit" element={<EdiTrip />} />
+                        </Routes>
+                    </main>
+                </AlertProvider>
             <Footer />
         </UserProvider>
     );

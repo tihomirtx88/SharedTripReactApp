@@ -16,16 +16,17 @@ const AlertContext = createContext({
 export const AlertProvider = ({children}) => {
     const [text, setText] = useState(``);
     const [type, setType] = useState(``);
-}
 
-const setAlert = (text,type) => {
-    setText(text);
-    setType(type);
 
-    setTimeout(()=> {
-        setText(``);
-        setType(``);
-    }, ALERT_TIME)
+    const setAlert = (text,type) => {
+        setText(text);
+        setType(type);
+
+        setTimeout(()=> {
+            setText(``);
+            setType(``);
+        }, ALERT_TIME)
+    }
 
 
     return(
