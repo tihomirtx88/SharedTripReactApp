@@ -79,7 +79,7 @@ const Register = () => {
             body: JSON.stringify(values),
             headers: {
                 "Content-Type": "application/json",
-            },
+            }
         })
             .then((res) => {
                 if (!res.ok) {
