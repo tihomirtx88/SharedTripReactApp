@@ -1,12 +1,17 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import { useContext } from "react";
+import AlertPopUpD from "../../context/AlertPopupD";
 import { UserContext } from "../../context/UserProvider";
 import SingleTripProfile from "./SingleTripProfile";
 
 const Profile = () => {
     const { user } = useContext(UserContext);
     const [tripInfo, setTripInfo] = useState({});
+
+    const [open, setOpen] = useState(false);
+    const closeModal = () => setOpen(false);
+    const [errorMessage, setErrorMessage] = useState("");
 
     useEffect(() => {
         fetch(`http://localhost:3030/data/trips/profile`, {
@@ -15,11 +20,19 @@ const Profile = () => {
                 "Content-type": "application/json",
             },
         })
-            .then((res) => res.json())
+            .then((res) => {
+                if (!res.ok) {
+                    throw Error({ message: "Bad Request!" });
+                }
+                return res.json();
+            })
             .then((data) => {
                 setTripInfo(data);
             })
-            .catch(() => alert(`Wrong fetch request`));
+            .catch((error) => {
+                setErrorMessage(error?.message || `Fetch error`);
+                setOpen(true);
+            });
     }, []);
     console.log(user.gender);
 
@@ -28,12 +41,11 @@ const Profile = () => {
             <div className="profile-container">
                 {user.gender == `male` ? (
                     <>
-                        <img className="profile-img" src={process.env.PUBLIC_URL + "/images/male.png"}/>
-                        
+                        <img className="profile-img" src={process.env.PUBLIC_URL + "/images/male.png"} />
                     </>
                 ) : (
                     <>
-                        <img className="profile-img" src={process.env.PUBLIC_URL + "/images/female.png"}/>
+                        <img className="profile-img" src={process.env.PUBLIC_URL + "/images/female.png"} />
                     </>
                 )}
                 <p>
@@ -52,6 +64,9 @@ const Profile = () => {
                     )}
                 </div>
             </div>
+            <AlertPopUpD open={open} closeModal={closeModal}>
+                {errorMessage}
+            </AlertPopUpD>
         </section>
     );
 };

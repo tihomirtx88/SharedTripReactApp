@@ -1,26 +1,26 @@
-import { useEffect } from "react"
-import { useContext } from "react"
-import { UserContext } from "../../context/UserProvider"
+import { useEffect } from "react";
+import { useContext } from "react";
+import { UserContext } from "../../context/UserProvider";
 
 const LogOut = () => {
-    const { logOut } = useContext(UserContext)
+    const { logOut } = useContext(UserContext);
 
     const fetchLogOut = () => {
         fetch(`http://localhost:3030/users/logout`)
-            .then(resp => {
+            .then((resp) => {
                 if (!resp.status === 204) {
                     throw Error();
                 }
-                logOut()
+                logOut();
             })
-            .catch(() => alert("Unsuccesful logout!"))
-    }
+            .catch(() => alert("Unsuccesful logout!"));
+    };
 
     useEffect(() => {
-        fetchLogOut()
-    }, [])
+        fetchLogOut();
+    }, []);
 
-    return null
-}
+    return null;
+};
 
-export default LogOut
+export default LogOut;

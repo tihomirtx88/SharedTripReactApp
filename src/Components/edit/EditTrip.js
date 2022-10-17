@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import AlertPopUpD from "../../context/AlertPopupD";
 import { UserContext } from "../../context/UserProvider";
 
 const EdiTrip = () => {
@@ -11,13 +12,25 @@ const EdiTrip = () => {
     const navigate = useNavigate();
     const { tripId } = useParams();
 
+    const [open, setOpen] = useState(false);
+    const closeModal = () => setOpen(false);
+    const [errorMessage, setErrorMessage] = useState("");
+
     useEffect(() => {
         fetch(`http://localhost:3030/data/trips/${tripId}`, {})
-            .then((res) => res.json())
+            .then((res) => {
+                if (!res.ok) {
+                    throw Error({ message: "Bad Request!" });
+                }
+                return res.json();
+            })
             .then((data) => {
                 setEditInfo(data);
             })
-            .catch(() => alert(`Wrong fetch request`));
+            .catch((error) => {
+                setErrorMessage(error?.message || "Fetch error!");
+                setOpen(true);
+            });
     }, []);
 
     const fetchEdit = () => {
@@ -194,6 +207,9 @@ const EdiTrip = () => {
                     </form>
                 </div>
             </div>
+            <AlertPopUpD open={open} closeModal={closeModal}>
+                {errorMessage}
+            </AlertPopUpD>
         </section>
     );
 };

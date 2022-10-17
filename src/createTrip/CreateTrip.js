@@ -4,6 +4,8 @@ import React from "react";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserProvider";
+import { useState } from "react";
+import AlertPopUpD from "../context/AlertPopupD";
 
 const FormGroup = ({ inputType, inputId, placeholder, inputName, value, handleOnChange, handleOnBlur }) => (
     <>
@@ -49,6 +51,10 @@ const CreateTrip = () => {
     const { user } = useContext(UserContext);
     const navigate = useNavigate();
 
+    const [open, setOpen] = useState(false);
+    const closeModal = () => setOpen(false);
+    const [errorMessage, setErrorMessage] = useState("");
+
     const createSchema = Yup.object().shape({
         start: Yup.string().min(4, "Too Short!").max(10, "Too Long!").required("Required!"),
         end: Yup.string().min(4, "Too Short!").max(10, "Too Long!").required("Required!"),
@@ -67,11 +73,19 @@ const CreateTrip = () => {
                 "Content-Type": "application/json",
             },
         })
-            .then((res) => res.json())
+            .then((res) => {
+                if (!res.ok) {
+                    throw Error({ message: "Bad Request!" });
+                }
+                return res.json();
+            })
             .then((data) => {
                 navigate(`/trips`);
             })
-            .catch(() => alert(`Fetch error`));
+            .catch((error) => {
+                setErrorMessage(error?.message || "Fetch error!");
+                setOpen(true);
+            });
     };
 
     return (
@@ -223,6 +237,9 @@ const CreateTrip = () => {
                     </Formik>
                 </div>
             </div>
+            <AlertPopUpD open={open} closeModal={closeModal}>
+                {errorMessage}
+            </AlertPopUpD>
         </section>
     );
 };

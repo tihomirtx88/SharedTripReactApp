@@ -1,9 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { UserContext } from "../../context/UserProvider";
 import { Formik, ErrorMessage } from "formik";
 import * as Yup from "yup";
-
-
+import AlertPopUpD from "../../context/AlertPopupD";
 
 const FormGroup = ({ labelText, inputType, inputId, placeholder, inputName, value, handleOnChange, handleOnBlur }) => (
     <div className="form-group">
@@ -38,55 +37,13 @@ const SubmitButton = React.memo(() => (
     </button>
 ));
 
-const FormGroup = ({
-    labelText,
-    inputType,
-    inputId,
-    placeholder,
-    inputName,
-    value,
-    handleOnChange
-}) => (
-    <div className="form-group">
-        <label htmlFor="email">{labelText}</label>
-        <input
-            type={inputType}
-            className="form-control"
-            id={inputId}
-            placeholder={placeholder}
-            name={inputName}
-            value={value || ""}
-            onChange={handleOnChange}
-        />
-    </div>
-)
-
-
-// First load the Login page, open the console and look which component renders when you are typing something in the input fields. 
-// You can see that Login component rerenders on every change which set the value. You can see with react.memo only Login component rerenders.
-// Delete React.memo() (don't forget that it is a function, do not mess up the brackets!!!) and repeat the procedure. You have to see
-// that FormGroupText component rerenders also. 
- 
-
-const FormGroupText = React.memo(() => {
-    console.log("render text")
-    return <div className="form-group">
-        <p>
-            Not registered yet? <a href="/register">Register Now!</a>
-        </p>
-    </div>
-})
-
-const SubmitButton = React.memo(() => (
-    <button type="submit" className="btn btn-primary">
-        Submit
-    </button>
-))
-
 const Login = () => {
-    console.log("render main component")
+    console.log("render main component");
     const { setUser } = useContext(UserContext);
 
+    const [open, setOpen] = useState(false);
+    const closeModal = () => setOpen(false);
+    const [errorMessage, setErrorMessage] = useState("");
 
     const fetchLogin = (values) => {
         fetch(`http://localhost:3030/users/login`, {
@@ -96,14 +53,22 @@ const Login = () => {
                 "Content-Type": "application/json",
             },
         })
-            .then((res) => res.json())
+            .then((res) => {
+                if (!res.ok) {
+                    throw Error({ message: "Bad Request!" });
+                }
+                return res.json();
+            })
             .then((data) => {
                 if (!data.accessToken) {
                     throw Error();
                 }
-                setUser(data)
+                setUser(data);
             })
-            .catch(() => alert(`todo`));
+            .catch((error) => {
+                setErrorMessage(error?.message || "Fetch error!");
+                setOpen(true);
+            });
     };
 
     const createSchema = Yup.object().shape({
@@ -120,9 +85,9 @@ const Login = () => {
             <div className="container login-page">
                 <h1>Login</h1>
                 <div className="login">
-                    <Formik 
-                        initialValues={{}} 
-                        validationSchema={createSchema} 
+                    <Formik
+                        initialValues={{}}
+                        validationSchema={createSchema}
                         onSubmit={(values) => handleOnSubmit(values)}
                     >
                         {(formik) => (
@@ -148,12 +113,15 @@ const Login = () => {
                                     handleOnBlur={formik.handleBlur}
                                 />
                                 <FormGroupText />
-                                <SubmitButton/>
+                                <SubmitButton />
                             </form>
                         )}
                     </Formik>
                 </div>
             </div>
+            <AlertPopUpD open={open} closeModal={closeModal}>
+                {errorMessage}
+            </AlertPopUpD>
         </section>
     );
 };

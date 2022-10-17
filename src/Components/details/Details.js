@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../../context/UserProvider";
 import { Link } from "react-router-dom";
+import AlertPopUpD from "../../context/AlertPopupD";
 
 const Details = () => {
     const [trip, setTrip] = useState({});
@@ -16,17 +17,30 @@ const Details = () => {
     const [isJoined, setIsJoined] = useState(false);
     const [emailsInfo, setEmailsInfo] = useState([]);
 
+    const [open, setOpen] = useState(false);
+    const closeModal = () => setOpen(false);
+    const [errorMessage, setErrorMessage] = useState("");
+
     const [isLoading, setIsLoading] = useState(false);
 
     const fetchTrip = () => {
         fetch(`http://localhost:3030/data/trips/${tripId}`, {})
-            .then((res) => res.json())
+            .then((res) => {
+                if (!res.ok) {
+                    throw Error({ message: "Bad Request!" });
+                }
+                return res.json();
+            })
             .then((data) => {
                 if (data.error) {
                     logOut();
                     return;
                 }
                 setTrip(data);
+            })
+            .catch((error) => {
+                setErrorMessage(error?.message || `Fetch error`);
+                setOpen(true);
             })
             .finally(() => setIsLoading(false));
     };
@@ -42,10 +56,9 @@ const Details = () => {
 
     useEffect(() => {
         setIsLoading(true);
-        setTimeout(() => {
-            fetchTrip();
-            fetchBuddies();
-        }, 5000);
+
+        fetchTrip();
+        fetchBuddies();
     }, []);
 
     useEffect(() => {
@@ -199,6 +212,9 @@ const Details = () => {
                     </>
                 )}
             </div>
+            <AlertPopUpD open={open} closeModal={closeModal}>
+                {errorMessage}
+            </AlertPopUpD>
         </section>
     );
 };

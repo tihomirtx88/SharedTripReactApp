@@ -1,15 +1,29 @@
 import { useState } from "react";
 import { useEffect } from "react";
+import AlertPopUpD from "../../context/AlertPopupD";
 import SingleTrip from "./singletrip/SingleTrip";
 
 const TripCatalog = () => {
     const [trips, setTrips] = useState([]);
 
+    const [open, setOpen] = useState(false);
+    const closeModal = () => setOpen(false);
+    const [errorMessage, setErrorMessage] = useState("");
+
     useEffect(() => {
         fetch(`http://localhost:3030/data/trips`, {})
-            .then((res) => res.json())
+            .then((res) => {
+                if (!res.ok) {
+                    throw Error({ message: "Bad Request!" });
+                }
+                return res.json();
+            })
             .then((data) => {
                 setTrips(data);
+            })
+            .catch((error) => {
+                setErrorMessage(error?.message || `Fetch error`)
+                setOpen(true);
             });
     }, []);
 
@@ -33,6 +47,9 @@ const TripCatalog = () => {
                     </div>
                 )}
             </div>
+            <AlertPopUpD open={open} closeModal={closeModal}>
+                {errorMessage}
+            </AlertPopUpD>
         </section>
     );
 };
