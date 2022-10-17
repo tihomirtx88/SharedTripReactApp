@@ -2,10 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Formik, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import Popup from "reactjs-popup";
 import AlertPopUpD from "../../context/AlertPopupD";
-
-
 
 const FormGroup = ({ labelText, inputType, inputId, placeholder, inputName, value, handleOnChange, handleOnBlur }) => (
     <div className="form-group">
@@ -69,30 +66,31 @@ const Submitbutton = () => {
 
 const Register = () => {
     const navigate = useNavigate();
+    
     const [open, setOpen] = useState(false);
     const closeModal = () => setOpen(false);
-    const [errorMessage, setErrorMessage] = useState("")
+    const [errorMessage, setErrorMessage] = useState("");
 
     const fetchRegister = (values) => {
-        fetch(`http://localhost:3030/users/registerr`, {
+        fetch(`http://localhost:3030/users/register`, {
             method: `POST`,
             body: JSON.stringify(values),
             headers: {
                 "Content-Type": "application/json",
-            }
+            },
         })
             .then((res) => {
                 if (!res.ok) {
-                    throw Error({ message: "Bad Request!" })
+                    throw Error({ message: "Bad Request!" });
                 }
-                return res.json()
+                return res.json();
             })
             .then((data) => {
                 navigate(`/`);
             })
             .catch((error) => {
-                setErrorMessage(error?.message || "Fetch error!")
-                setOpen(true)
+                setErrorMessage(error?.message || "Fetch error!");
+                setOpen(true);
             });
     };
 
@@ -189,10 +187,7 @@ const Register = () => {
                     </Formik>
                 </div>
             </div>
-            <AlertPopUpD
-                open={open}
-                closeModal={closeModal}
-            >
+            <AlertPopUpD open={open} closeModal={closeModal}>
                 {errorMessage}
             </AlertPopUpD>
         </section>

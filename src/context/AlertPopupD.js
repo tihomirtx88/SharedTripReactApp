@@ -1,21 +1,16 @@
 import Popup from "reactjs-popup";
 
-const AlertPopUpD = ({
-    open,
-    closeModal,
-    children
-}) => {
-
+const AlertPopUpD = ({ open, closeModal, children }) => {
     return (
         <Popup open={open} onClose={closeModal}>
-            <div>
-                <a className="close" onClick={closeModal}>
+            <div className="divAlert">
+                <a className="divAlertButton" onClick={closeModal}>
                     &times;
                 </a>
-                {children}
+                <div className="divTextAlert">{children}</div>
             </div>
         </Popup>
-    )
-}
+    );
+};
 
 export default AlertPopUpD;
