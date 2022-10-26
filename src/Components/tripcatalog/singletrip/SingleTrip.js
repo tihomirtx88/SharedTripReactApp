@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom";
+import { SplideSlide} from "@splidejs/react-splide";
+import "@splidejs/splide/dist/css/splide.min.css"
+
 
 const SingleTrip = ({ trip }) => {
     return (
-        <div className="col-lg-4 col-md-6 mb-4">
+        <SplideSlide>
+            <div className="col-lg-4 col-md-6 mb-4">
             <div className="card h-100">
                 <img className="card-img-top" src={trip.carImg} alt="" />
                 <div className="card-body">
@@ -26,6 +30,7 @@ const SingleTrip = ({ trip }) => {
                 </div>
             </div>
         </div>
+        </SplideSlide>
     );
 };
 

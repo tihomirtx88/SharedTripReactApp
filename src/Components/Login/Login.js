@@ -4,12 +4,13 @@ import { Formik, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import AlertPopUpD from "../../context/AlertPopupD";
 
-const FormGroup = ({ labelText, inputType, inputId, placeholder, inputName, value, handleOnChange, handleOnBlur }) => (
+const FormGroup = ({ labelText, inputType, inputId, placeholder, inputName, value, handleOnChange, handleOnBlur, dataTestId }) => (
     <div className="form-group">
         <label htmlFor="email">{labelText}</label>
         <input
             type={inputType}
             className="form-control"
+            data-testid={dataTestId}
             id={inputId}
             placeholder={placeholder}
             name={inputName}
@@ -32,7 +33,7 @@ const FormGroupText = React.memo(() => {
 });
 
 const SubmitButton = React.memo(() => (
-    <button type="submit" className="btn btn-primary">
+    <button type="submit" data-testid="data-test-button" className="btn btn-primary">
         Submit
     </button>
 ));
@@ -96,6 +97,7 @@ const Login = () => {
                                     inputType="text"
                                     labelText="Email address"
                                     inputId="email"
+                                    dataTestId="data-test-email"
                                     placeholder="Enter email"
                                     inputName="email"
                                     value={formik.values.email}
@@ -106,6 +108,7 @@ const Login = () => {
                                     inputType="password"
                                     labelText="Password"
                                     inputId="password"
+                                    dataTestId="data-test-password"
                                     placeholder="Enter password"
                                     inputName="password"
                                     value={formik.values.password}

@@ -7,12 +7,13 @@ import { UserContext } from "../context/UserProvider";
 import { useState } from "react";
 import AlertPopUpD from "../context/AlertPopupD";
 
-const FormGroup = ({ inputType, inputId, placeholder, inputName, value, handleOnChange, handleOnBlur }) => (
+const FormGroup = ({ inputType, inputId, placeholder, inputName, value, handleOnChange, handleOnBlur, dataTestId }) => (
     <>
         <input
             type={inputType}
             className="form-control-2"
             id={inputId}
+            data-testid={dataTestId}
             placeholder={placeholder}
             name={inputName}
             value={value || ""}
@@ -115,6 +116,7 @@ const CreateTrip = () => {
                                         inputType="text"
                                         className="form-control-2"
                                         inputId="startPoint"
+                                        dataTestId="data-test-start"
                                         placeholder="Studentski grad"
                                         inputName="start"
                                         value={formik.values.start}
@@ -126,6 +128,7 @@ const CreateTrip = () => {
                                         inputType="text"
                                         className="form-control-2"
                                         inputId="endPoint"
+                                        dataTestId="data-test-end"
                                         placeholder="Pamporovo"
                                         inputName="end"
                                         value={formik.values.end}
@@ -148,6 +151,7 @@ const CreateTrip = () => {
                                         inputType="text"
                                         className="form-control-2"
                                         inputId="date"
+                                        dataTestId="data-test-date"
                                         placeholder="18 May 2021"
                                         inputName="date"
                                         value={formik.values.date}
@@ -159,6 +163,7 @@ const CreateTrip = () => {
                                         inputType="text"
                                         className="form-control-2"
                                         inputId="time"
+                                        dataTestId="data-test-time"
                                         placeholder="19:00 PM"
                                         inputName="time"
                                         value={formik.values.time}
@@ -175,6 +180,7 @@ const CreateTrip = () => {
                                         inputType="text"
                                         className="form-control-2"
                                         inputId="carImage"
+                                        dataTestId="data-test-imageUrl"
                                         placeholder="https://..."
                                         inputName="carImg"
                                         value={formik.values.carImg}
@@ -186,6 +192,7 @@ const CreateTrip = () => {
                                         inputType="text"
                                         className="form-control-2"
                                         inputId="carBrand"
+                                        dataTestId="data-test-carBrand"
                                         placeholder="Audi"
                                         inputName="carBrand"
                                         value={formik.values.carBrand}
@@ -202,6 +209,7 @@ const CreateTrip = () => {
                                         inputType="text"
                                         className="form-control-2"
                                         inputId="seats"
+                                        dataTestId="data-test-seats"
                                         placeholder={4}
                                         inputName="seats"
                                         value={formik.values.seats}
@@ -213,6 +221,7 @@ const CreateTrip = () => {
                                         inputType="text"
                                         className="form-control-2"
                                         inputId="price"
+                                        dataTestId="data-test-price"
                                         placeholder={25}
                                         inputName="price"
                                         value={formik.values.price}

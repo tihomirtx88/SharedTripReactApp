@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useEffect } from "react";
 import AlertPopUpD from "../../context/AlertPopupD";
 import SingleTrip from "./singletrip/SingleTrip";
+import { Splide } from "@splidejs/react-splide";
+import "@splidejs/splide/dist/css/splide.min.css"
 
 const TripCatalog = () => {
     const [trips, setTrips] = useState([]);
@@ -37,16 +39,20 @@ const TripCatalog = () => {
                     begin!
                 </p>
             </header>
-            <div className="row text-center">
-                {trips.length > 0 ? (
-                    trips.map((trip) => <SingleTrip key={trip._id} trip={trip} />)
-                ) : (
-                    <div className="no-trips">
+            <Splide options={{
+                 perPage: "4",
+                 arrows: false,
+                 drag: `free`,
+                 gap: `5rem`
+            }}>
+               {trips.length > 0 
+                 ? trips.map((trip) => <SingleTrip key={trip._id} trip={trip} />)
+                 :  <div className="no-trips">
                         <img src="https://www.stagweb.co.uk/img/activities/big/sexyhitchhiker1.jpg" />
                         <p className="lead">Hitchhiker time...</p>
                     </div>
-                )}
-            </div>
+                }
+            </Splide>
             <AlertPopUpD open={open} closeModal={closeModal}>
                 {errorMessage}
             </AlertPopUpD>
