@@ -9,11 +9,22 @@ const Header = () => {
         <>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
                 <div className="container">
-                    <img className="logo" src={process.env.PUBLIC_URL + "/images/before.png"} alt="before-logo" />
-                    <img className="car logo" src={process.env.PUBLIC_URL + "/images/trip-logo.png"} alt="trip-logo" />
-                    <img className="logo" src={process.env.PUBLIC_URL + "/images/after.png"} alt="after-logo" />
-                    <div className="collapse navbar-collapse" id="navbarResponsive">
+                    <div className="imagesHeader">
+                        <img className="logo" src={process.env.PUBLIC_URL + "/images/before.png"} alt="before-logo" />
+                        <img
+                            className="car logo"
+                            src={process.env.PUBLIC_URL + "/images/trip-logo.png"}
+                            alt="trip-logo"
+                        />
+                        <img className="logo" src={process.env.PUBLIC_URL + "/images/after.png"} alt="after-logo" />
+                    </div>
+                    <div className="navbarResponsive" id="navbarResponsive">
                         <ul className="navbar-nav ml-auto">
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/search">
+                                    Search
+                                </Link>
+                            </li>
                             <li className="nav-item">
                                 <Link className="nav-link" to="/">
                                     Home
@@ -24,7 +35,6 @@ const Header = () => {
                                     Shared Trips
                                 </Link>
                             </li>
-
                             {user.email ? (
                                 <>
                                     <li className="nav-item">

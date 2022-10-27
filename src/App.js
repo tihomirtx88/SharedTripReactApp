@@ -9,6 +9,7 @@ import Login from "./Components/login/Login";
 import LogOut from "./Components/logout/LogOut";
 import Profile from "./Components/profile/Profile";
 import Register from "./Components/register/Register";
+import Search from "./Components/search/Search";
 import TripCatalog from "./Components/tripcatalog/TripCatalog";
 import { UserProvider } from "./context/UserProvider";
 import CreateTrip from "./createTrip/CreateTrip";
@@ -29,6 +30,7 @@ function App() {
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/details/:tripId" element={<Details />} />
                     <Route path="/details/:tripId/edit" element={<EdiTrip />} />
+                    <Route path="/search" element={<Search />} />
                 </Routes>
             </main>
             <Footer />

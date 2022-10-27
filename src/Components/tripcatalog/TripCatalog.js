@@ -38,12 +38,14 @@ const TripCatalog = () => {
                     Find yours Sharedtrip's buddies, when you share with us yours trip plans and let the exploration
                     begin!
                 </p>
-            </header>
+            </header>   
+            <>
             <Splide options={{
                  perPage: "4",
-                 arrows: false,
+                 arrows: true,
                  drag: `free`,
-                 gap: `5rem`
+                 gap: `5rem`,
+                 width: "100%"
             }}>
                {trips.length > 0 
                  ? trips.map((trip) => <SingleTrip key={trip._id} trip={trip} />)
@@ -53,6 +55,7 @@ const TripCatalog = () => {
                     </div>
                 }
             </Splide>
+            </>        
             <AlertPopUpD open={open} closeModal={closeModal}>
                 {errorMessage}
             </AlertPopUpD>

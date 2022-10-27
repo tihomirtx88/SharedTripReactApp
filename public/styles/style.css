@@ -1,5 +1,6 @@
 @import url("https://use.fontawesome.com/releases/v5.12.1/css/all.css");
 @import url("https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css");
+@import 'search.css';
 
 body {
     position: relative;
@@ -47,6 +48,17 @@ body::before {
 
 .divTextAlert{
    padding: 10px 10px;
+}
+
+.navbarResponsive{
+    flex-basis: 100%;
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    display: flex;
+    max-width: 800px;
 }
 
 .loader {
@@ -215,6 +227,7 @@ h5.mt-4 {
     box-shadow: 0px 5px 9px -2px #f4c537, inset -14px -14px 30px -13px rgb(0 0 0 / 55%);
     text-align: left;
     padding: 10px 10px 10px 40px !important;
+    height: 185px;
 }
 
 .card-body i {
@@ -223,6 +236,10 @@ h5.mt-4 {
 
 .card-info {
     display: inline-block;
+}
+
+.container {
+    max-width: 1500px;
 }
 
 .line {
@@ -501,11 +518,15 @@ button.btn {
 
 .btn.btn-warning {
     color: #fff;
+    height: 36px;
+    margin-left: 1em;
 }
 
 .btn.btn-primary {
     background-color: #0578b9;
     border: none;
+    width: 100px;
+    height: 35px;
 }
 
 .btn.btn-primary:hover {
@@ -576,6 +597,7 @@ footer {
     width: 100%;
 }
 
+  
 @keyframes showNav {
     from {
         opacity: 0;
