@@ -21,6 +21,11 @@ const Header = () => {
                     <div className="navbarResponsive" id="navbarResponsive">
                         <ul className="navbar-nav ml-auto">
                             <li className="nav-item">
+                                <Link className="nav-link" to="/google">
+                                    Google Map
+                                </Link>
+                            </li>
+                            <li className="nav-item">
                                 <Link className="nav-link" to="/search">
                                     Search
                                 </Link>

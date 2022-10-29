@@ -132,7 +132,7 @@ const Details = () => {
                                 </span>
                                 <h5>
                                     {" "}
-                                    <span>2021-07-07</span> at <span>{}</span>{" "}
+                                    <span>2021-07-07</span> at <span>{trip.date}</span>{" "}
                                 </h5>
                             </div>
                         </div>
@@ -166,6 +166,9 @@ const Details = () => {
 
                                 <h5>
                                     Price: <span className="lead">{trip.price}</span> BGN
+                                </h5>
+                                <h5>
+                                    Car Brand: <span className="lead">{trip.carBrand}</span>
                                 </h5>
                                 {user.email && (
                                     <div className="actions">
