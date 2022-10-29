@@ -3,6 +3,7 @@ import "./App.css";
 import Details from "./Components/details/Details";
 import EdiTrip from "./Components/edit/EditTrip";
 import Footer from "./Components/footer/Footer";
+import GoogleMap from "./Components/googlemap/GoogleMap";
 import Header from "./Components/header/Header";
 import Home from "./Components/home/Home";
 import Login from "./Components/login/Login";
@@ -23,6 +24,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/register" element={<Register />} />
+                    <Route path="/google" element={<GoogleMap />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/logout" element={<LogOut />} />
                     <Route path="/create" element={<CreateTrip />} />
