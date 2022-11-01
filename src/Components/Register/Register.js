@@ -4,13 +4,14 @@ import { Formik, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import AlertPopUpD from "../../context/AlertPopupD";
 
-const FormGroup = ({ labelText, inputType, inputId, placeholder, inputName, value, handleOnChange, handleOnBlur }) => (
+const FormGroup = ({ labelText, inputType, inputId, placeholder, inputName, value, handleOnChange, handleOnBlur, dataTestId }) => (
     <div className="form-group">
         <label htmlFor="email">{labelText}</label>
         <input
             type={inputType}
             className="form-control"
             id={inputId}
+            data-testid={dataTestId}
             placeholder={placeholder}
             name={inputName}
             value={value || ""}
@@ -24,6 +25,7 @@ const FormGroup = ({ labelText, inputType, inputId, placeholder, inputName, valu
 const GenderGroup = ({
     inputType,
     inputId,
+    dataTestId,
     inputName,
     inputValue,
     handleOnChange,
@@ -34,6 +36,7 @@ const GenderGroup = ({
     <>
         <input
             type={inputType}
+            data-testid={dataTestId}
             id={inputId}
             name={inputName}
             value={inputValue}
@@ -128,6 +131,7 @@ const Register = () => {
                                     inputType="text"
                                     labelText="Email address"
                                     inputId="email"
+                                    dataTestId="data-test-email"
                                     placeholder="Enter email"
                                     inputName="email"
                                     value={formik.values.email}
@@ -139,6 +143,7 @@ const Register = () => {
                                     inputType="password"
                                     labelText="Password"
                                     inputId="password"
+                                    dataTestId="data-test-password"
                                     placeholder="Password"
                                     inputName="password"
                                     value={formik.values.password}
@@ -162,6 +167,7 @@ const Register = () => {
                                     <GenderGroup
                                         inputType="radio"
                                         inputId="female"
+                                        dataTestId="data-test-female"
                                         inputName="gender"
                                         inputValue="female"
                                         inputChecked={formik.values.gender == "female"}
@@ -172,6 +178,7 @@ const Register = () => {
                                     <GenderGroup
                                         inputType="radio"
                                         inputId="male"
+                                        dataTestId="data-test-male"
                                         inputName="gender"
                                         inputValue="male"
                                         inputChecked={formik.values.gender == "male"}

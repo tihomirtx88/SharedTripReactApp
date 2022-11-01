@@ -1,11 +1,14 @@
 import "./map.css";
-import { useEffect, useState } from "react";
-import { MapContainer, TileLayer, Popup, Polyline, Marker} from "react-leaflet";
+import { MapContainer, TileLayer, Popup, Marker} from "react-leaflet";
 import teslaProject from "./tesla-site.json";
 
 const GoogleMap = () => {
-
-    const filteredData = teslaProject.filter(data => data.address.country === "Italy");
+   
+    
+    const filteredData = teslaProject.filter(data => data.address.country === "Italy" 
+      || data.address.country === "Spain" || data.address.country === "Germany" ||
+      data.address.country === "France" || data.address.country === "Portugal" ||
+      data.address.country === "Austria" || data.address.country === "Bulgaria");
     return (
         <MapContainer center={[42.733883, 25.485830]} zoom={6} scrollWheelZoom={true}>
             <TileLayer

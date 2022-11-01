@@ -1,20 +1,5 @@
 [
     {
-        "id": 2215,
-        "locationId": "NationalHistoricalMuseum",
-        "name": "National Historical Museum",
-        "address": {
-            "street": "ul. Vitoshko lale 16, 1404 Boyana, Sofia, Bulgaria",
-            "city": "Sofia",
-            "state": "16",
-            "country": "Bulgaria",
-            "region": "East Europe"
-        },
-        "gps": { "latitude": 42.144920, "longitude": 24.750320},
-        "dateOpened": "1973",
-        "type": "History and heritage of the country"
-    },
-    {
         "id": 2216,
         "locationId": "seoulgangseosupercharger",
         "name": "Seoul - Gangseo, South Korea",
@@ -128352,3 +128337,4 @@
         "urlDiscuss": false
     }
 ]
+
