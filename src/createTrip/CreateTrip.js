@@ -66,7 +66,7 @@ const CreateTrip = () => {
     });
 
     const handleOnSubmit = (values) => {
-        fetch(`http://localhost:3030/data/trips`, {
+        fetch(`https://sharedtripsbackend-production.up.railway.app/data/trips`, {
             method: `POST`,
             body: JSON.stringify(values),
             headers: {

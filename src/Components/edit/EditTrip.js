@@ -17,7 +17,7 @@ const EdiTrip = () => {
     const [errorMessage, setErrorMessage] = useState("");
 
     useEffect(() => {
-        fetch(`http://localhost:3030/data/trips/${tripId}`, {})
+        fetch(`https://sharedtripsbackend-production.up.railway.app/data/trips/${tripId}`, {})
             .then((res) => {
                 if (!res.ok) {
                     throw Error({ message: "Bad Request!" });
