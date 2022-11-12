@@ -75,7 +75,7 @@ const Register = () => {
     const [errorMessage, setErrorMessage] = useState("");
 
     const fetchRegister = (values) => {
-        fetch(`http://localhost:3030/users/register`, {
+        fetch(`https://sharedtripsbackend-production.up.railway.app/users/register`, {
             method: `POST`,
             body: JSON.stringify(values),
             headers: {

@@ -14,7 +14,7 @@ const Profile = () => {
     const [errorMessage, setErrorMessage] = useState("");
 
     useEffect(() => {
-        fetch(`http://localhost:3030/data/trips/profile`, {
+        fetch(`https://sharedtripsbackend-production.up.railway.app/data/trips/profile`, {
             headers: {
                 "X-Authorization": user.accessToken,
                 "Content-type": "application/json",

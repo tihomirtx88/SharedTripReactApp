@@ -13,7 +13,7 @@ const TripCatalog = () => {
     const [errorMessage, setErrorMessage] = useState("");
 
     useEffect(() => {
-        fetch(`http://localhost:3030/data/trips`, {})
+        fetch(`https://sharedtripsbackend-production.up.railway.app/data/trips`, {})
             .then((res) => {
                 if (!res.ok) {
                     throw Error({ message: "Bad Request!" });

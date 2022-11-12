@@ -47,7 +47,7 @@ const Login = () => {
     const [errorMessage, setErrorMessage] = useState("");
 
     const fetchLogin = (values) => {
-        fetch(`http://localhost:3030/users/login`, {
+        fetch(`https://sharedtripsbackend-production.up.railway.app/users/login`, {
             method: `POST`,
             body: JSON.stringify(values),
             headers: {

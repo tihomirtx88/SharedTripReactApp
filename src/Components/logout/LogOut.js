@@ -6,7 +6,7 @@ const LogOut = () => {
     const { logOut } = useContext(UserContext);
 
     const fetchLogOut = () => {
-        fetch(`http://localhost:3030/users/logout`)
+        fetch(`https://sharedtripsbackend-production.up.railway.app/users/logout`)
             .then((resp) => {
                 if (!resp.status === 204) {
                     throw Error();
