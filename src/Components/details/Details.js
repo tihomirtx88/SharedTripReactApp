@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../../context/UserProvider";
 import { Link } from "react-router-dom";
 import AlertPopUpD from "../../context/AlertPopupD";
+import { LOCAL_URL, DEPLOY_URL } from "../../urls"
 
 const Details = () => {
     const [trip, setTrip] = useState({});
@@ -24,7 +25,7 @@ const Details = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     const fetchTrip = () => {
-        fetch(`https://sharedtripsbackend-production.up.railway.app/data/trips/${tripId}`, {})
+        fetch(`${LOCAL_URL}/data/trips/${tripId}`, {})
             .then((res) => {
                 if (!res.ok) {
                     throw Error({ message: "Bad Request!" });
@@ -46,7 +47,7 @@ const Details = () => {
     };
 
     const fetchBuddies = () => {
-        fetch(`http://localhost:3030/data/trips/buddies/${tripId}`, {})
+        fetch(`${LOCAL_URL}/data/trips/buddies/${tripId}`, {})
             .then((res) => res.json())
             .then((data) => {
                 setEmailsInfo(data);
@@ -75,7 +76,7 @@ const Details = () => {
         const confirmation = window.confirm("Are you sure you want to delete this trip?");
 
         if (confirmation) {
-            fetch(`http://localhost:3030/data/trips/${tripId}`, {
+            fetch(`${LOCAL_URL}/data/trips/${tripId}`, {
                 method: `DELETE`,
                 headers: {
                     "X-Authorization": user.accessToken,
@@ -94,7 +95,7 @@ const Details = () => {
 
     const onJoinEvent = (ev) => {
         ev.preventDefault();
-        fetch(`http://localhost:3030/data/join/${tripId}`, {
+        fetch(`${LOCAL_URL}/data/join/${tripId}`, {
             method: `POST`,
             body: JSON.stringify(trip),
             headers: {
