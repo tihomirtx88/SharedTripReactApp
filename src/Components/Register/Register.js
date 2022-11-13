@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Formik, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import AlertPopUpD from "../../context/AlertPopupD";
-import { LOCAL_URL } from "../../urls";
+import { SITE_URL } from "../../urls";
 
 const FormGroup = ({ labelText, inputType, inputId, placeholder, inputName, value, handleOnChange, handleOnBlur, dataTestId }) => (
     <div className="form-group">
@@ -76,7 +76,7 @@ const Register = () => {
     const [errorMessage, setErrorMessage] = useState("");
 
     const fetchRegister = (values) => {
-        fetch(`${LOCAL_URL}/users/register`, {
+        fetch(`${SITE_URL}/users/register`, {
             method: `POST`,
             body: JSON.stringify(values),
             headers: {

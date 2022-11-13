@@ -3,7 +3,7 @@ import { UserContext } from "../../context/UserProvider";
 import { Formik, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import AlertPopUpD from "../../context/AlertPopupD";
-import { LOCAL_URL } from "../../urls";
+import { SITE_URL } from "../../urls";
 
 const FormGroup = ({ labelText, inputType, inputId, placeholder, inputName, value, handleOnChange, handleOnBlur, dataTestId }) => (
     <div className="form-group">
@@ -48,7 +48,7 @@ const Login = () => {
     const [errorMessage, setErrorMessage] = useState("");
 
     const fetchLogin = (values) => {
-        fetch(`${LOCAL_URL}/users/login`, {
+        fetch(`${SITE_URL}/users/login`, {
             method: `POST`,
             body: JSON.stringify(values),
             headers: {

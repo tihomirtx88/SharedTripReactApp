@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import SingleTrip from "../tripcatalog/singletrip/SingleTrip";
 import { Splide } from "@splidejs/react-splide";
 import "@splidejs/splide/dist/css/splide.min.css";
-import { LOCAL_URL } from "../../urls";
+import { SITE_URL } from "../../urls";
 
 const Search = () => {
     const [trips, setTrips] = useState([]);
@@ -11,7 +11,7 @@ const Search = () => {
     const [filteredTrips, setFilteredTrips] = useState([]);
 
     useEffect(() => {
-        fetch(`${LOCAL_URL}/data/trips`, {})
+        fetch(`${SITE_URL}/data/trips`, {})
             .then((res) => {
                 if (!res.ok) {
                     throw Error({ message: "Bad Request!" });

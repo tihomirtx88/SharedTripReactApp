@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useContext } from "react";
 import AlertPopUpD from "../../context/AlertPopupD";
 import { UserContext } from "../../context/UserProvider";
-import { LOCAL_URL } from "../../urls";
+import { SITE_URL } from "../../urls";
 import SingleTripProfile from "./SingleTripProfile";
 
 const Profile = () => {
@@ -15,7 +15,7 @@ const Profile = () => {
     const [errorMessage, setErrorMessage] = useState("");
 
     useEffect(() => {
-        fetch(`${LOCAL_URL}/data/trips/profile`, {
+        fetch(`${SITE_URL}/data/trips/profile`, {
             headers: {
                 "X-Authorization": user.accessToken,
                 "Content-type": "application/json",
