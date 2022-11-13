@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import AlertPopUpD from "../../context/AlertPopupD";
 import { UserContext } from "../../context/UserProvider";
+import { LOCAL_URL } from "../../urls";
 
 const EdiTrip = () => {
     const { user } = useContext(UserContext);
@@ -17,7 +18,7 @@ const EdiTrip = () => {
     const [errorMessage, setErrorMessage] = useState("");
 
     useEffect(() => {
-        fetch(`https://sharedtripsbackend-production.up.railway.app/data/trips/${tripId}`, {})
+        fetch(`${LOCAL_URL}/data/trips/${tripId}`, {})
             .then((res) => {
                 if (!res.ok) {
                     throw Error({ message: "Bad Request!" });
@@ -34,7 +35,7 @@ const EdiTrip = () => {
     }, []);
 
     const fetchEdit = () => {
-        fetch(`http://localhost:3030/data/trips/${tripId}`, {
+        fetch(`${LOCAL_URL}/data/trips/${tripId}`, {
             method: `PUT`,
             body: JSON.stringify(editInfo),
             headers: {

@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 import { useContext } from "react";
 import { UserContext } from "../../context/UserProvider";
+import { LOCAL_URL } from "../../urls";
 
 const LogOut = () => {
     const { logOut } = useContext(UserContext);
 
     const fetchLogOut = () => {
-        fetch(`https://sharedtripsbackend-production.up.railway.app/users/logout`)
+        fetch(`${LOCAL_URL}/users/logout`)
             .then((resp) => {
                 if (!resp.status === 204) {
                     throw Error();
