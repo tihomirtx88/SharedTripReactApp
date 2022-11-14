@@ -68,9 +68,9 @@ const Login = () => {
                 setUser(data);
             })
             .catch((error) => {
-                setErrorMessage(error?.message || "Fetch error!");
+                setErrorMessage("Fetch error!");
                 setOpen(true);
-            });
+            })
     };
 
     const createSchema = Yup.object().shape({

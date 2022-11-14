@@ -92,8 +92,8 @@ const Register = () => {
             .then((data) => {
                 navigate(`/`);
             })
-            .catch((error) => {
-                setErrorMessage(error?.message || "Fetch error!");
+            .catch(() => {
+                setErrorMessage("Fetch error!");
                 setOpen(true);
             });
     };

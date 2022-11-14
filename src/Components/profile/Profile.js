@@ -31,9 +31,9 @@ const Profile = () => {
                 setTripInfo(data);
             })
             .catch((error) => {
-                setErrorMessage(error?.message || `Fetch error`);
+                setErrorMessage("Fetch error!");
                 setOpen(true);
-            });
+            })
     }, []);
     console.log(user.gender);
 

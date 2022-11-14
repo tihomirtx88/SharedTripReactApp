@@ -51,7 +51,10 @@ const EdiTrip = () => {
                 setEditInfo(data);
                 navigate(`/details/${tripId}`);
             })
-            .catch(() => alert(`Cannot fetch`));
+            .catch((error) => {
+                setErrorMessage("Fetch error!");
+                setOpen(true);
+            })
     };
 
     const changeHandler = (ev) => {

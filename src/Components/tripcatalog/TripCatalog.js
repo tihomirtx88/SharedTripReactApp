@@ -25,9 +25,9 @@ const TripCatalog = () => {
                 setTrips(data);
             })
             .catch((error) => {
-                setErrorMessage(error?.message || `Fetch error`)
+                setErrorMessage("Fetch error!");
                 setOpen(true);
-            });
+            })
     }, []);
 
     return (

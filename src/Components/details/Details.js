@@ -40,7 +40,7 @@ const Details = () => {
                 setTrip(data);
             })
             .catch((error) => {
-                setErrorMessage(error?.message || `Fetch error`);
+                setErrorMessage("Fetch error!");
                 setOpen(true);
             })
             .finally(() => setIsLoading(false));
@@ -89,7 +89,10 @@ const Details = () => {
                     }
                     navigate(`/`);
                 })
-                .catch(() => alert(`TODO`));
+                .catch((error) => {
+                    setErrorMessage("Fetch error!");
+                    setOpen(true);
+                })
         }
     };
 
