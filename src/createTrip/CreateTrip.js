@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserProvider";
 import { useState } from "react";
 import AlertPopUpD from "../context/AlertPopupD";
-import { LOCAL_URL } from "../urls";
+import { MONGO_URL } from "../urls";
 
 const FormGroup = ({ inputType, inputId, placeholder, inputName, value, handleOnChange, handleOnBlur, dataTestId }) => (
     <>
@@ -68,7 +68,7 @@ const CreateTrip = () => {
     });
 
     const handleOnSubmit = (values) => {
-        fetch(`${LOCAL_URL}/data/trips`, {
+        fetch(`${MONGO_URL}/data/trips`, {
             method: `POST`,
             body: JSON.stringify(values),
             headers: {

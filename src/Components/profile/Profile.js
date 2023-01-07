@@ -15,7 +15,7 @@ const Profile = () => {
     const [errorMessage, setErrorMessage] = useState("");
 
     useEffect(() => {
-        fetch(`${LOCAL_URL}/data/trips/profile`, {
+        fetch(`${MONGO_URL}/data/trips/profile`, {
             headers: {
                 "X-Authorization": user.accessToken,
                 "Content-type": "application/json",

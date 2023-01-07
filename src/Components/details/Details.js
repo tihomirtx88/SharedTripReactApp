@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../../context/UserProvider";
 import { Link } from "react-router-dom";
 import AlertPopUpD from "../../context/AlertPopupD";
-import { LOCAL_URL, DEPLOY_URL } from "../../urls"
+import { MONGO_URL } from "../../urls"
 
 const Details = () => {
     const [trip, setTrip] = useState({});
@@ -25,7 +25,7 @@ const Details = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     const fetchTrip = () => {
-        fetch(`${LOCAL_URL}/data/trips/${tripId}`, {})
+        fetch(`${MONGO_URL}/data/trips/${tripId}`, {})
             .then((res) => {
                 if (!res.ok) {
                     throw Error({ message: "Bad Request!" });
@@ -47,7 +47,7 @@ const Details = () => {
     };
 
     const fetchBuddies = () => {
-        fetch(`${LOCAL_URL}/data/trips/buddies/${tripId}`, {})
+        fetch(`${MONGO_URL}/data/trips/buddies/${tripId}`, {})
             .then((res) => res.json())
             .then((data) => {
                 setEmailsInfo(data);
@@ -76,7 +76,7 @@ const Details = () => {
         const confirmation = window.confirm("Are you sure you want to delete this trip?");
 
         if (confirmation) {
-            fetch(`${LOCAL_URL}/data/trips/${tripId}`, {
+            fetch(`${MONGO_URL}/data/trips/${tripId}`, {
                 method: `DELETE`,
                 headers: {
                     "X-Authorization": user.accessToken,
@@ -95,7 +95,7 @@ const Details = () => {
 
     const onJoinEvent = (ev) => {
         ev.preventDefault();
-        fetch(`${LOCAL_URL}/data/join/${tripId}`, {
+        fetch(`${MONGO_URL}/data/join/${tripId}`, {
             method: `POST`,
             body: JSON.stringify(trip),
             headers: {

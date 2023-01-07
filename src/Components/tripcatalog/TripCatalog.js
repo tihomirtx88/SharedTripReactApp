@@ -4,7 +4,7 @@ import AlertPopUpD from "../../context/AlertPopupD";
 import SingleTrip from "./singletrip/SingleTrip";
 import { Splide } from "@splidejs/react-splide";
 import "@splidejs/splide/dist/css/splide.min.css"
-import { LOCAL_URL } from "../../urls";
+import { MONGO_URL} from "../../urls";
 
 const TripCatalog = () => {
     const [trips, setTrips] = useState([]);
@@ -14,7 +14,7 @@ const TripCatalog = () => {
     const [errorMessage, setErrorMessage] = useState("");
 
     useEffect(() => {
-        fetch(`${LOCAL_URL}/data/trips`, {})
+        fetch(`${MONGO_URL}/data/trips`, {})
             .then((res) => {
                 if (!res.ok) {
                     throw Error({ message: "Bad Request!" });
