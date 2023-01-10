@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useContext } from "react";
 import AlertPopUpD from "../../context/AlertPopupD";
 import { UserContext } from "../../context/UserProvider";
-import { LOCAL_URL } from "../../urls";
+import { MONGO_URL } from "../../urls";
 import SingleTripProfile from "./SingleTripProfile";
 
 const Profile = () => {

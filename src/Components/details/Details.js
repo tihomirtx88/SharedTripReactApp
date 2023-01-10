@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../../context/UserProvider";
 import { Link } from "react-router-dom";
 import AlertPopUpD from "../../context/AlertPopupD";
-import { MONGO_URL } from "../../urls"
+import { MONGO_URL, LOCAL_URL } from "../../urls"
 
 const Details = () => {
     const [trip, setTrip] = useState({});
