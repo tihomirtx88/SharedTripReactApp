@@ -4,7 +4,7 @@ import "@splidejs/splide/dist/css/splide.min.css";
 
 const SingleTrip = ({ trip }) => {
     return (
-        <SplideSlide>
+        <SplideSlide className="splideSide">
             <div className="col-lg-4 col-md-6 mb-4">
                 <div className="card h-100">
                     <img className="card-img-top" src={trip.carImg} alt="" />

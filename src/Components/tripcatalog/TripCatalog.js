@@ -42,7 +42,7 @@ const TripCatalog = () => {
             </header>   
             <>
             <Splide options={{
-                 perPage: "4",
+                 perPage: "3",
                  arrows: true,
                  drag: `free`,
                  gap: `5rem`,
