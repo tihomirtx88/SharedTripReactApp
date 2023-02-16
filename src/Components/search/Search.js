@@ -11,7 +11,7 @@ const Search = () => {
     const [filteredTrips, setFilteredTrips] = useState([]);
 
     useEffect(() => {
-        fetch(`${LOCAL_URL}/data/trips`, {})
+        fetch(`${MONGO_URL}/data/trips`, {})
             .then((res) => {
                 if (!res.ok) {
                     throw Error({ message: "Bad Request!" });
