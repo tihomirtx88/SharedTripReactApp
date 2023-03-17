@@ -21,7 +21,7 @@ const FormGroup = ({ inputType, inputId, placeholder, inputName, value, handleOn
             onChange={handleOnChange}
             onBlur={handleOnBlur}
         />
-        <ErrorMessage name={inputName} />
+        <ErrorMessage name={inputName} render={msg => <div style={{color: 'red'}}>{msg}</div>}/>
     </>
 );
 
@@ -45,7 +45,7 @@ const DescriptionGroup = ({ inputLabel, inputId, placeholder, inputName, value, 
             onChange={handleOnChange}
             onBlur={handleOnBlur}
         />
-        <ErrorMessage name={inputName} />
+        <ErrorMessage name={inputName} render={msg => <div style={{color: 'red'}}>{msg}</div>}/>
     </>
 );
 

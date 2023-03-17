@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import SingleTrip from "../tripcatalog/singletrip/SingleTrip";
 import { Splide } from "@splidejs/react-splide";
 import "@splidejs/splide/dist/css/splide.min.css";
-import { LOCAL_URL } from "../../urls";
+import { MONGO_URL } from "../../urls";
 
 const Search = () => {
     const [trips, setTrips] = useState([]);
@@ -26,6 +26,7 @@ const Search = () => {
     const filterTrip = (text, criteria = `all`) => {
         if (criteria === `all`) {
             setFilteredTrips(trips);
+            console.log(trips, 'from fetch data');
         } else {
             setFilteredTrips(trips.filter((trip) => trip[criteria].toLowerCase().includes(text.toLowerCase())));
         }
