@@ -19,7 +19,7 @@ const FormGroup = ({ labelText, inputType, inputId, placeholder, inputName, valu
             onChange={handleOnChange}
             onBlur={handleOnBlur}
         />
-        <ErrorMessage name={inputName} />
+        <ErrorMessage name={inputName} render={msg => <div style={{color: 'red'}}>{msg}</div>}/>
     </div>
 );
 
@@ -46,7 +46,7 @@ const GenderGroup = ({
             onBlur={handleOnBlur}
         />
         <label htmlFor="female">{labelText}</label>
-        <ErrorMessage name={inputName} />
+        <ErrorMessage name={inputName} render={msg => <div style={{color: 'red'}}>{msg}</div>}/>
     </>
 );
 
