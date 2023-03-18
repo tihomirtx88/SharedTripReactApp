@@ -1,5 +1,4 @@
 import { Formik, ErrorMessage } from "formik";
-import * as Yup from "yup";
 import React from "react";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
@@ -7,6 +6,7 @@ import { UserContext } from "../context/UserProvider";
 import { useState } from "react";
 import AlertPopUpD from "../context/AlertPopupD";
 import { MONGO_URL } from "../urls";
+import { validateTripSchema } from "../common/validationSchemas";
 
 const FormGroup = ({ inputType, inputId, placeholder, inputName, value, handleOnChange, handleOnBlur, dataTestId }) => (
     <>
@@ -57,15 +57,7 @@ const CreateTrip = () => {
     const closeModal = () => setOpen(false);
     const [errorMessage, setErrorMessage] = useState("");
 
-    const createSchema = Yup.object().shape({
-        start: Yup.string().min(4, "Too Short!").max(10, "Too Long!").required("Required!"),
-        end: Yup.string().min(4, "Too Short!").max(10, "Too Long!").required("Required!"),
-        carImg: Yup.string().required("Required!"),
-        carBrand: Yup.string().min(4, "Too Short!").max(10, "Too Long!").required("Required!"),
-        price: Yup.number().min(1, "Too Short!").max(51, "Too Long!").required("Required!"),
-        seats: Yup.number().min(0, "Too Short!").max(5, "Too Long!").required("Required!"),
-        description: Yup.string().min(6, "Too Short!").max(50, "Too Long!").required("Required!"),
-    });
+    const createSchema = validateTripSchema
 
     const handleOnSubmit = (values) => {
         fetch(`${MONGO_URL}/data/trips`, {
