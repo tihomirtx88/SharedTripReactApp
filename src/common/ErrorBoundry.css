@@ -1,0 +1,7 @@
+.boundryError{
+    color: red;
+    font-size: 100px;
+    border-radius: 15px;
+    border: 4px solid lightcoral;
+    background-color: antiquewhite;
+}

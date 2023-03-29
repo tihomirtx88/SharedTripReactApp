@@ -35,7 +35,6 @@ const Profile = () => {
                 setOpen(true);
             });
     }, []);
-    console.log(user.gender);
 
     return (
         <section className="profile col-md-6 text-center col-lg" id="profile-page">

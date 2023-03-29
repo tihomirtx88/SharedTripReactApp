@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import ErrorBoundry from "./common/ErrorBoundry";
 import Details from "./Components/details/Details";
 import EdiTrip from "./Components/edit/EditTrip";
 import Footer from "./Components/footer/Footer";
@@ -21,19 +22,21 @@ function App() {
             <Header />
 
             <main>
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/register" element={<Register />} />
-                    <Route path="/google" element={<GoogleMap />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/logout" element={<LogOut />} />
-                    <Route path="/create" element={<CreateTrip />} />
-                    <Route path="/trips" element={<TripCatalog />} />
-                    <Route path="/profile" element={<Profile />} />
-                    <Route path="/details/:tripId" element={<Details />} />
-                    <Route path="/details/:tripId/edit" element={<EdiTrip />} />
-                    <Route path="/search" element={<Search />} />
-                </Routes>
+                <ErrorBoundry>
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/register" element={<Register />} />
+                        <Route path="/google" element={<GoogleMap />} />
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/logout" element={<LogOut />} />
+                        <Route path="/create" element={<CreateTrip />} />
+                        <Route path="/trips" element={<TripCatalog />} />
+                        <Route path="/profile" element={<Profile />} />
+                        <Route path="/details/:tripId" element={<Details />} />
+                        <Route path="/details/:tripId/edit" element={<EdiTrip />} />
+                        <Route path="/search" element={<Search />} />
+                    </Routes>
+                </ErrorBoundry>
             </main>
             <Footer />
         </UserProvider>
