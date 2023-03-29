@@ -26,7 +26,6 @@ const Search = () => {
     const filterTrip = (text, criteria = `all`) => {
         if (criteria === `all`) {
             setFilteredTrips(trips);
-            console.log(trips, 'from fetch data');
         } else {
             setFilteredTrips(trips.filter((trip) => trip[criteria].toLowerCase().includes(text.toLowerCase())));
         }

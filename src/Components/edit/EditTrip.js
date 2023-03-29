@@ -28,7 +28,6 @@ const EdiTrip = () => {
                 return res.json();
             })
             .then((data) => {
-                console.log(data)
                 setEditInfo(data);
             })
             .catch((error) => {
@@ -47,11 +46,9 @@ const EdiTrip = () => {
             },
         })
             .then((res) => {
-                console.log(res)
                 return res.json()
             })
             .then((data) => {
-                console.log(data)
                 if (data.error) {
                     throw Error();
                 }
@@ -104,8 +101,7 @@ const EdiTrip = () => {
                                     className="form-control-2"
                                     id="startPoint"
                                     name="start"
-                                    // value={editInfo.end || ""}
-                                    value={formik.values.start}
+                                    value={formik.values.start || ""}
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                 />
@@ -119,9 +115,7 @@ const EdiTrip = () => {
                                     className="form-control-2"
                                     id="endPoint"
                                     name="end"
-                                    // value={editInfo.end || ""}
-                                    // onChange={changeHandler}
-                                    value={formik.values.end}
+                                    value={formik.values.end || ""}
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                 />
@@ -142,9 +136,7 @@ const EdiTrip = () => {
                                     className="form-control-2"
                                     id="date"
                                     name="date"
-                                    // value={editInfo.date || ""}
-                                    // onChange={changeHandler}
-                                    value={formik.values.date}
+                                    value={formik.values.date || ""}
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                 />
@@ -154,9 +146,7 @@ const EdiTrip = () => {
                                     className="form-control-2"
                                     id="time"
                                     name="time"
-                                    // value={editInfo.time || ""}
-                                    // onChange={changeHandler}
-                                    value={formik.values.time}
+                                    value={formik.values.time || ""}
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                 />
@@ -171,9 +161,7 @@ const EdiTrip = () => {
                                     className="form-control-2"
                                     id="carImage"
                                     name="carImg"
-                                    // value={editInfo.carImg || ""}
-                                    // onChange={changeHandler}
-                                    value={formik.values.carImg}
+                                    value={formik.values.carImg || ""}
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                 />
@@ -183,9 +171,7 @@ const EdiTrip = () => {
                                     className="form-control-2"
                                     id="carBrand"
                                     name="carBrand"
-                                    // value={editInfo.carBrand || ""}
-                                    // onChange={changeHandler}
-                                    value={formik.values.carBrand}
+                                    value={formik.values.carBrand || ""}
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                 />
@@ -200,11 +186,9 @@ const EdiTrip = () => {
                                     className="form-control-2"
                                     id="seats"
                                     name="seats"
-                                    // value={editInfo.seats || ""}
-                                    // onChange={changeHandler}
-                                    value={formik.values.seats}
+                                    value={formik.values.seats || ""}
                                     onChange={formik.handleChange}
-                                    onBlur={formik.handleBlur}
+                                    onBlur={formik.handleBlur }
                                 />
     
                                 <input
@@ -212,9 +196,7 @@ const EdiTrip = () => {
                                     className="form-control-2"
                                     id="price"
                                     name="price"
-                                    // value={editInfo.price || ""}
-                                    // onChange={changeHandler}
-                                    value={formik.values.price}
+                                    value={formik.values.price || ""}
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                 />
@@ -225,9 +207,7 @@ const EdiTrip = () => {
                                     className="form-control"
                                     id="description"
                                     name="description"
-                                    // value={editInfo.description || ""}
-                                    // onChange={changeHandler}
-                                    value={formik.values.description}
+                                    value={formik.values.description || ""}
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                 />
