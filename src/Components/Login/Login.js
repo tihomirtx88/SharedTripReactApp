@@ -40,7 +40,6 @@ const SubmitButton = React.memo(() => (
 ));
 
 const Login = () => {
-    console.log("render main component");
     const { setUser } = useContext(UserContext);
 
     const [open, setOpen] = useState(false);

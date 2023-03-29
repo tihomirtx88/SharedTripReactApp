@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 import AlertPopUpD from "../../context/AlertPopupD";
 import { UserContext } from "../../context/UserProvider";
 import { MONGO_URL } from "../../urls";
+import { validateTripSchema } from "../../common/validationSchemas";
 
 const EdiTrip = () => {
     const { user } = useContext(UserContext);
@@ -35,16 +36,18 @@ const EdiTrip = () => {
             });
     }, []);
 
-    const fetchEdit = () => {
+    const fetchEdit = (values) => {
         fetch(`${MONGO_URL}/data/trips/${tripId}`, {
             method: `PUT`,
-            body: JSON.stringify(editInfo),
+            body: JSON.stringify(values),
             headers: {
                 "Content-Type": "application/json",
                 "X-Authorization": user.accessToken,
             },
         })
-            .then((res) => res.json())
+            .then((res) => {
+                return res.json()
+            })
             .then((data) => {
                 if (data.error) {
                     throw Error();
@@ -62,34 +65,23 @@ const EdiTrip = () => {
         });
     };
 
-    const onSubmit = (ev) => {
-        ev.preventDefault();
-        fetchEdit();
+    const onSubmit = (values) => {
+        fetchEdit(values);
     };
 
-    const createSchema = Yup.object().shape({
-        start: Yup.string().required('This field is required').min(4, 'Start point must be at least 4 characters long'),
-            end: Yup.string().required('This field is required').min(4, 'End point must be at least 4 characters long'),
-            date: Yup.string().required('This field is required'),
-            time: Yup.string().required('This field is required'),
-            carImg: Yup.string().required('This field is required').max(100, 'Image url must be less of 100 characters long'),
-            carBrand: Yup.string().required('This field is required').min(4, 'Car brand must be at least 4 characters long'),
-            seats: Yup.string().required('This field is required').min(0, 'Seats must be at least 1').max(4, 'Seats must be less of 5'),
-            price: Yup.string().required('This field is required').min(1, 'Price must be at least 1').max(50, 'Price must be less of 50'),
-            description: Yup.string().required('This field is required').min(10, 'Description must be at least 10 characters long')
-    });
+    const createSchema = validateTripSchema
 
-   
     return (
         <section className="py-5" id="edit-trip-page">
             <div className="container edit">
                 <h1>Edit trip</h1>
                 <div>
                     <Formik
-                    initialValues={{}}
-                    validationSchema={createSchema}
-                    onChange={(values) => changeHandler(values)}
-                    onSubmit={(values) => onSubmit(values)}
+                        initialValues={editInfo}
+                        enableReinitialize
+                        validationSchema={createSchema}
+                        onChange={(values) => changeHandler(values)}
+                        onSubmit={(values) => onSubmit(values)}
                     >
                         {(formik) => (
                             <form onSubmit={formik.handleSubmit}>
@@ -109,8 +101,7 @@ const EdiTrip = () => {
                                     className="form-control-2"
                                     id="startPoint"
                                     name="start"
-                                    // value={editInfo.end || ""}
-                                    value={formik.values.start}
+                                    value={formik.values.start || ""}
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                 />
@@ -124,9 +115,7 @@ const EdiTrip = () => {
                                     className="form-control-2"
                                     id="endPoint"
                                     name="end"
-                                    // value={editInfo.end || ""}
-                                    // onChange={changeHandler}
-                                    value={formik.values.end}
+                                    value={formik.values.end || ""}
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                 />
@@ -147,9 +136,7 @@ const EdiTrip = () => {
                                     className="form-control-2"
                                     id="date"
                                     name="date"
-                                    // value={editInfo.date || ""}
-                                    // onChange={changeHandler}
-                                    value={formik.values.date}
+                                    value={formik.values.date || ""}
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                 />
@@ -159,9 +146,7 @@ const EdiTrip = () => {
                                     className="form-control-2"
                                     id="time"
                                     name="time"
-                                    // value={editInfo.time || ""}
-                                    // onChange={changeHandler}
-                                    value={formik.values.time}
+                                    value={formik.values.time || ""}
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                 />
@@ -176,9 +161,7 @@ const EdiTrip = () => {
                                     className="form-control-2"
                                     id="carImage"
                                     name="carImg"
-                                    // value={editInfo.carImg || ""}
-                                    // onChange={changeHandler}
-                                    value={formik.values.carImg}
+                                    value={formik.values.carImg || ""}
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                 />
@@ -188,9 +171,7 @@ const EdiTrip = () => {
                                     className="form-control-2"
                                     id="carBrand"
                                     name="carBrand"
-                                    // value={editInfo.carBrand || ""}
-                                    // onChange={changeHandler}
-                                    value={formik.values.carBrand}
+                                    value={formik.values.carBrand || ""}
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                 />
@@ -205,11 +186,9 @@ const EdiTrip = () => {
                                     className="form-control-2"
                                     id="seats"
                                     name="seats"
-                                    // value={editInfo.seats || ""}
-                                    // onChange={changeHandler}
-                                    value={formik.values.seats}
+                                    value={formik.values.seats || ""}
                                     onChange={formik.handleChange}
-                                    onBlur={formik.handleBlur}
+                                    onBlur={formik.handleBlur }
                                 />
     
                                 <input
@@ -217,9 +196,7 @@ const EdiTrip = () => {
                                     className="form-control-2"
                                     id="price"
                                     name="price"
-                                    // value={editInfo.price || ""}
-                                    // onChange={changeHandler}
-                                    value={formik.values.price}
+                                    value={formik.values.price || ""}
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                 />
@@ -230,9 +207,7 @@ const EdiTrip = () => {
                                     className="form-control"
                                     id="description"
                                     name="description"
-                                    // value={editInfo.description || ""}
-                                    // onChange={changeHandler}
-                                    value={formik.values.description}
+                                    value={formik.values.description || ""}
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                 />
