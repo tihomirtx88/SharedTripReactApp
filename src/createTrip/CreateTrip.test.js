@@ -6,8 +6,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { UserProvider } from "../context/UserProvider";
 import CreateTrip from "./CreateTrip";
 
-// import CreateTrip from "./CreateTrip";
-
 let container = null;
 
 beforeEach(() => {
